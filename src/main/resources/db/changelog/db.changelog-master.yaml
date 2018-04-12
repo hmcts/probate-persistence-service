@@ -1,0 +1,185 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: alun
+    changes:
+    - createSequence:
+        sequenceName: hibernate_sequence
+- changeSet:
+    id: 2
+    author: alun
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: BIGINT
+        - column:
+            name: creation_time
+            type: TIMESTAMP(6) WITHOUT TIME ZONE
+        - column:
+            name: form_data
+            type: JSONB
+        - column:
+            name: modification_time
+            type: TIMESTAMP(6) WITHOUT TIME ZONE
+        tableName: submission
+- changeSet:
+    id: 3
+    author: alun
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: submission_pkey
+        tableName: submission
+- changeSet:
+    id: 4
+    author: alun
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: VARCHAR(255)
+        - column:
+            name: creation_time
+            type: TIMESTAMP(6) WITHOUT TIME ZONE
+        - column:
+            name: form_data
+            type: JSONB
+        - column:
+            name: modification_time
+            type: TIMESTAMP(6) WITHOUT TIME ZONE
+        tableName: formdata
+- changeSet:
+    id: 5
+    author: alun
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: formdata_pkey
+        tableName: formdata
+- changeSet:
+    id: 6
+    author: taleb
+    changes:
+    - addColumn:
+       columns:
+       - column:
+           name: submission_reference
+           type: BIGINT
+       tableName: formdata
+- changeSet:
+    id: 7
+    author: taleb
+    changes:
+    - renameColumn:
+        columnDataType: JSONB
+        newColumnName: submit_data
+        oldColumnName: form_data
+        tableName: submission
+- changeSet:
+    id: 8
+    author: dumitru
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(255)
+        - column:
+            name: formdata_id
+            type: VARCHAR(255)
+        - column:
+            name: creation_time
+            type: TIMESTAMP(6) WITHOUT TIME ZONE
+        - column:
+            name: modification_time
+            type: TIMESTAMP(6) WITHOUT TIME ZONE
+        tableName: invitedata
+- changeSet:
+    id: 9
+    author: dumitru
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: formdata_id
+        baseTableName: invitedata
+        constraintName: fk_invitedata_formdata
+        deferrable: true
+        initiallyDeferred: true
+        onDelete: CASCADE
+        referencedColumnNames: id
+        referencedTableName: formdata
+- changeSet:
+    id: 10
+    author: dumitru
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: invitedata_pkey
+        tableName: invitedata
+- changeSet:
+    id: 11
+    author: dumitru
+    changes:
+    - addNotNullConstraint:
+        columnName: formdata_id
+        tableName: invitedata
+
+- changeSet:
+    id: 12
+    author: dumitru
+    changes:
+    - addNotNullConstraint:
+        columnName: creation_time
+        tableName: invitedata
+- changeSet:
+    id: 13
+    author: dumitru
+    changes:
+    - addColumn:
+       columns:
+       - column:
+           name: phone_number
+           type: VARCHAR(256)
+       tableName: invitedata
+
+- changeSet:
+    id: 14
+    author: dumitru
+    changes:
+    - addColumn:
+       columns:
+       - column:
+           name: main_executor_name
+           type: VARCHAR(256)
+       tableName: invitedata
+- changeSet:
+    id: 15
+    author: dumitru
+    changes:
+    - addColumn:
+       columns:
+       - column:
+           name: agreed
+           type: BOOLEAN
+           defaultValueBoolean: false
+       tableName: invitedata
+- changeSet:
+    id: 16
+    author: nigel
+    changes:
+    - dropDefaultValue:
+       columnName: agreed
+       tableName: invitedata

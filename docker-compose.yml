@@ -1,0 +1,42 @@
+version: '2.1'
+
+services:
+  persistence-service:
+    build:
+      context: .
+    image: probate/persistence-service
+    # image: docker.artifactory.reform.hmcts.net/probate/persistence-service
+    command: --wait-for-database 30
+    container_name: persistence-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://persistence-service-database:5432/probate
+      - PROBATE_POSTGRESQL_HOSTNAME=persistence-service-database
+      - PROBATE_POSTGRESQL_PORT=5432
+      - PROBATE_POSTGRESQL_DATABASE=probate
+      - PROBATE_POSTGRESQL_USER=probate
+      - PROBATE_POSTGRESQL_PASSWORD=probate
+      - PROBATE_PERSISTENCE_PORT=8282
+      - http_proxy=
+      - https_proxy=
+      - no_proxy=
+    ports:
+     - 8282:8282
+    links:
+      - persistence-service-database
+    depends_on:
+      - persistence-service-database
+
+  persistence-service-database:
+    build:
+      context: docker/database
+    image: probate/persistence-service-database
+    # image: docker.artifactory.reform.hmcts.net/probate/persistence-service-database:029be26d40b4c4d4a792f801d94b8569472fb014
+    container_name: persistence-service-database
+    ports:
+      - 5432:5432
+    volumes:
+      - persistence-service-database-data:/var/lib/postgresql/data
+
+volumes:
+  persistence-service-database-data:
+
