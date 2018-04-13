@@ -1,4 +1,4 @@
-# Probate submit service 
+# Probate Persistence service 
 Microservice to handle persistence layer for probate
 
 
