@@ -10,18 +10,26 @@ Microservice to handle persistence layer for probate
 ### Running the application
 #### Docker
 To run the service locally you can use the *postgres* Docker image which can be run with the following command:  
-`S docker run --name postgres -e POSTGRES_PASSWORD=password123 -e POSTGRES_USER=probate -p 15432:5432 -d postgres`
+```
+S docker run --name postgres -e POSTGRES_PASSWORD=password123 -e POSTGRES_USER=probate -p 15432:5432 -d postgres
+```
 
 Once the image has been imported or started, you can access the database with the following command:  
-`$ psql -p 15432 -U probate -h 0.0.0.0`  
+```
+$ psql -p 15432 -U probate -h 0.0.0.0
+```  
 You will be prompted for a password which is `password123`.
 
 #### Building and Running the Persistence Service
 Install dependencies and build the service by executing the following command:  
-`$ ./gradlew clean build`
+```
+$ ./gradlew clean build
+```
 
 Once the build has completed, you will find the new *.jar* in `build/libs`. If the postgres Docker container is running, you can run the *.jar*, else you will need to refer to the previous section before running the command:  
-`$ java -jar build/libs/persistence-service-1.0.1.jar`
+```
+$ java -jar build/libs/persistence-service-1.0.1.jar
+```
 
 ## Developing
 
