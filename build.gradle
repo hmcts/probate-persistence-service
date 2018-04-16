@@ -86,8 +86,12 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     maven { url "http://repo1.maven.org/maven2/" }
     maven { url "https://plugins.gradle.org/m2/" }
+    maven { url  "https://dl.bintray.com/hmcts/hmcts-maven" }
 }
 
+def versions = [
+    logging: '2.0.2'
+]
 
 dependencies {
 
@@ -101,7 +105,8 @@ dependencies {
 
     compile group: 'org.liquibase.ext', name:'liquibase-hibernate5', version: '3.6'
 
-    compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: '1.2.0'
+    compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
+    compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
 
     compile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
