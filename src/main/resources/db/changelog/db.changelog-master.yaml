@@ -189,12 +189,12 @@ databaseChangeLog:
     changes:
     - createSequence:
         sequenceName: birmingham_sequence
-        startValue: 1
+        startValue: 20000
 - changeSet:
     id: 18
     author: nigel
     changes:
     - createSequence:
         sequenceName: oxford_sequence
-        startValue: 1
+        startValue: 10000
 
