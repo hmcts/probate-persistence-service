@@ -183,3 +183,18 @@ databaseChangeLog:
     - dropDefaultValue:
        columnName: agreed
        tableName: invitedata
+- changeSet:
+    id: 17
+    author: nigel
+    changes:
+    - createSequence:
+        sequenceName: birmingham_sequence
+        startValue: 1
+- changeSet:
+    id: 18
+    author: nigel
+    changes:
+    - createSequence:
+        sequenceName: oxford_sequence
+        startValue: 1
+
