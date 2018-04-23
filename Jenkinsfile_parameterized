@@ -30,3 +30,4 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 withParameterizedPipeline('java', product, component, params.ENVIRONMENT, 'sandbox') {
   loadVaultSecrets(secrets)
 }
+

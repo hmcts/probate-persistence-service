@@ -63,7 +63,7 @@ module "probate-persistence-service" {
 
 module "probate-persistence-service-vault" {
   source              = "git@github.com:hmcts/moj-module-key-vault?ref=master"
-  name                = "pro-business-ser-${var.env}"
+  name                = "pro-persist-ser-${var.env}"
   product             = "${var.product}"
   env                 = "${var.env}"
   tenant_id           = "${var.tenant_id}"
