@@ -67,7 +67,7 @@ variable "probate_postgresql_show_sql" {
 }
 
 variable "log_level" {
-  type = "string"
+  default = "INFO"
 }
 
 
