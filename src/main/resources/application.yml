@@ -19,3 +19,7 @@ spring:
 
 server:
   port: ${probate.persistence.port}
+
+registries:
+  - oxford
+  - birmingham
