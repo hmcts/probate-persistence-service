@@ -38,7 +38,7 @@ public class SequenceNumberControllerTest {
         when(this.mockIncrementer.nextLongValue())
                 .thenReturn(1234L);
 
-        this.mvc.perform(get("/seq/oxford"))
+        this.mvc.perform(get("/sequence-number/registryName"))
                 .andExpect(status().isOk()).andExpect(content().json("1234"));
 
     }
