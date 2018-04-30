@@ -14,7 +14,7 @@ public class SequenceNumberController {
     @Autowired
     private Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers;
 
-    @GetMapping(value = "/seq/{registry}")
+    @GetMapping(value = "/sequence-number/{registry}")
     public Long getNext(@PathVariable String registry) {
 
         return registrySequenceNumbers.get(registry).nextLongValue();
