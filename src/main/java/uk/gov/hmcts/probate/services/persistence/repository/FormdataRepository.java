@@ -10,4 +10,6 @@ import uk.gov.hmcts.probate.services.persistence.model.Formdata;
 public interface FormdataRepository extends PagingAndSortingRepository<Formdata, String> {
 
     Formdata findById(@Param("id") String id);
+
+    Formdata findBySubmissionReference(@Param("submissionReference") long submissionReference);
 }
