@@ -19,7 +19,7 @@ plugins {
     id 'org.liquibase.gradle' version '1.2.4'
 
     // Plugin gradle-git-properties creates git.properties from the last git commit.
-    // @see: https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
+    // See {@linktourl https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties}
     id 'com.gorylenko.gradle-git-properties' version '1.4.21'
 }
 
