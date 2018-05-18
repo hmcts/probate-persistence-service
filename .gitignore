@@ -5,3 +5,5 @@ target/
 /nbactions.xml
 .gradle/
 build/
+out/
+classes/

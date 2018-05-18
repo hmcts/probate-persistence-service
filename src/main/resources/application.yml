@@ -2,6 +2,8 @@
 
 
 spring:
+  application:
+    name: probate-persistence-service
   jpa:
     database: POSTGRESQL
     show-sql: ${probate.persistence.show_sql}
@@ -17,3 +19,7 @@ spring:
 
 server:
   port: ${probate.persistence.port}
+
+registries:
+  - oxford
+  - birmingham
