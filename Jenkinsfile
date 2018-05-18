@@ -22,7 +22,7 @@ def rpmTagger
 def app = "persistence-service"
 def artifactorySourceRepo = "probate-local"
 
-node {
+node(reformMgmtDevBuildAgent07.reform.hmcts.net) {
     try {
         def storeRPMToArtifactory = false
         def newAppVersion
