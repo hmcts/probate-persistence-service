@@ -15,5 +15,5 @@ public interface InvitedataRepository extends PagingAndSortingRepository<Invited
     Invitedata findById(@Param("id") String id);
 
     @RestResource(path = "formdata")
-    List<Invitedata> findByFormdataId(String id);
+    List<Invitedata> findByFormdataId(@Param("id") String id);
 }
