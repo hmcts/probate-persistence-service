@@ -91,7 +91,7 @@ repositories {
 }
 
 def versions = [
-        logging: '3.0.1'
+        logging: '2.2.1'
 ]
 
 dependencies {
