@@ -17,9 +17,6 @@ plugins {
     id 'org.owasp.dependencycheck' version '3.0.2'
     id 'com.github.ben-manes.versions' version '0.15.0'
     id 'org.liquibase.gradle' version '1.2.4'
-
-    // Plugin gradle-git-properties creates git.properties from the last git commit.
-    // See {@linktourl https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties}
     id 'com.gorylenko.gradle-git-properties' version '1.4.21'
 }
 
