@@ -10,10 +10,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 public class ProbatePersistenceInfoContributorTest {
 
-	private final static String GIT_COMMIT_TIME = "1526912708";
     private final static String VALID_COMMIT_ID = "2921eb6292eab0bd9ce8a42b44cf32fe9f4b0069";
-    private final static String VALID_COMMIT_MESSAGE = "PRO-1234: Initial build of code."; 
-    private final static String VALID_COMMIT_TIME = "Mon, 21 May 2018 14:25:08 UTC";
+    private final static String VALID_COMMIT_TIME = "2018-05-23T13:59+0000";
     
     private final static String EMPTY_VALUE = "";
     private ProbatePersistenceInfoContributor infoContributor = new ProbatePersistenceInfoContributor();
@@ -23,16 +21,16 @@ public class ProbatePersistenceInfoContributorTest {
 
         try {
             ReflectionTestUtils.setField(infoContributor, "commitId", VALID_COMMIT_ID);
-            ReflectionTestUtils.setField(infoContributor, "commitMessage", VALID_COMMIT_MESSAGE);
-            ReflectionTestUtils.setField(infoContributor, "commitTime", GIT_COMMIT_TIME);
+            ReflectionTestUtils.setField(infoContributor, "commitTime", VALID_COMMIT_TIME);
             
             Info.Builder builder = new Info.Builder();
             infoContributor.contribute(builder);
 
-            Map<String, String> gitMap = (Map<String, String>) builder.build().getDetails().get("git");
-            assertEquals("Checking valid git commit id", VALID_COMMIT_ID, gitMap.get("commitId"));            
-            assertEquals("Checking valid git commit message", VALID_COMMIT_MESSAGE, gitMap.get("commitMessage"));
-            assertEquals("Checking valid git commit date", VALID_COMMIT_TIME, gitMap.get("commitTime"));
+            @SuppressWarnings("unchecked")
+			Map<String, Map<String, String>> gitMap = (Map<String, Map<String, String>>) builder.build().getDetails().get("git");
+            Map<String, String> commitMap = (Map<String, String>) gitMap.get("commit");
+            assertEquals("Checking valid git commit id", VALID_COMMIT_ID, commitMap.get("id"));            
+            assertEquals("Checking valid git commit date", VALID_COMMIT_TIME, commitMap.get("time"));
 
         } catch (Exception e){
             assert(false);
@@ -46,13 +44,13 @@ public class ProbatePersistenceInfoContributorTest {
             Info.Builder builder = new Info.Builder();
             infoContributor.contribute(builder);
             
-            Map<String, String> gitMap = (Map<String, String>) builder.build().getDetails().get("git");
-            assertEquals("Checking empty git commit id", EMPTY_VALUE, gitMap.get("commitId"));            
-            assertEquals("Checking empty git commit message", EMPTY_VALUE, gitMap.get("commitMessage"));
-            assertEquals("Checking empty git commit date", EMPTY_VALUE, gitMap.get("commitTime"));            
+            @SuppressWarnings("unchecked")
+			Map<String, Map<String, String>> gitMap = (Map<String, Map<String, String>>) builder.build().getDetails().get("git");
+            Map<String, String> commitMap = (Map<String, String>) gitMap.get("commit");
+            assertEquals("Checking empty git commit id", EMPTY_VALUE, commitMap.get("id"));            
+            assertEquals("Checking empty git commit date", EMPTY_VALUE, commitMap.get("time"));            
 
         } catch (Exception e){
-        	e.printStackTrace();
             assert(false);
         }
     }  
@@ -62,16 +60,16 @@ public class ProbatePersistenceInfoContributorTest {
     	
         try {
             ReflectionTestUtils.setField(infoContributor, "commitId", EMPTY_VALUE);
-            ReflectionTestUtils.setField(infoContributor, "commitMessage", VALID_COMMIT_MESSAGE);
-            ReflectionTestUtils.setField(infoContributor, "commitTime", GIT_COMMIT_TIME);
+            ReflectionTestUtils.setField(infoContributor, "commitTime", VALID_COMMIT_TIME);
             
             Info.Builder builder = new Info.Builder();
             infoContributor.contribute(builder);
             
-            Map<String, String> gitMap = (Map<String, String>) builder.build().getDetails().get("git");
-            assertEquals("Checking empty git commit id", EMPTY_VALUE, gitMap.get("commitId"));   
-            assertEquals("Checking valid git commit message", VALID_COMMIT_MESSAGE, gitMap.get("commitMessage"));
-            assertEquals("Checking valid git commit date", VALID_COMMIT_TIME, gitMap.get("commitTime"));            
+            @SuppressWarnings("unchecked")
+			Map<String, Map<String, String>> gitMap = (Map<String, Map<String, String>>) builder.build().getDetails().get("git");
+            Map<String, String> commitMap = (Map<String, String>) gitMap.get("commit");
+            assertEquals("Checking empty git commit id", EMPTY_VALUE, commitMap.get("id"));   
+            assertEquals("Checking valid git commit date", VALID_COMMIT_TIME, commitMap.get("time"));            
 
         } catch (Exception e){
             assert(false);
