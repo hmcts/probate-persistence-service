@@ -28,13 +28,8 @@ public class ProbatePersistenceInfoContributorTest {
             
             Info.Builder builder = new Info.Builder();
             infoContributor.contribute(builder);
-            
-            
-            
+
             Map<String, String> gitMap = (Map<String, String>) builder.build().getDetails().get("git");
-            
-            System.out.println( "Date: " + gitMap.get("commitTime") );
-            
             assertEquals("Checking valid git commit id", VALID_COMMIT_ID, gitMap.get("commitId"));            
             assertEquals("Checking valid git commit message", VALID_COMMIT_MESSAGE, gitMap.get("commitMessage"));
             assertEquals("Checking valid git commit date", VALID_COMMIT_TIME, gitMap.get("commitTime"));
