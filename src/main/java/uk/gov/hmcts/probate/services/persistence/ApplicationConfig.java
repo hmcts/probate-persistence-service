@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -25,6 +26,7 @@ import uk.gov.hmcts.probate.services.persistence.model.Submission;
 @EnableJpaRepositories(basePackages = {"uk.gov.hmcts.probate.services.persistence.repository"})
 @Configuration
 @ConfigurationProperties
+@PropertySource(value = "git.properties", ignoreResourceNotFound = true)
 public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
 
     @Override
@@ -36,7 +38,7 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     private DataSource dataSource;
 
     private List<String> registries = new ArrayList<>();
-
+    
     public List<String> getRegistries() {
         return registries;
     }
@@ -46,15 +48,5 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
         return registries
                 .stream()
                 .collect(Collectors.toMap(s -> s, s -> new PostgreSQLSequenceMaxValueIncrementer(dataSource, s + "_sequence")));
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer propsConfig
-                = new PropertySourcesPlaceholderConfigurer();
-        propsConfig.setLocation(new ClassPathResource("git.properties"));
-        propsConfig.setIgnoreResourceNotFound(true);
-        propsConfig.setIgnoreUnresolvablePlaceholders(true);
-        return propsConfig;
     }
 }
