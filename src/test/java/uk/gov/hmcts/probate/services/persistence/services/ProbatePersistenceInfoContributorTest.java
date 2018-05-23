@@ -13,7 +13,7 @@ public class ProbatePersistenceInfoContributorTest {
 	private final static String GIT_COMMIT_TIME = "1526912708";
     private final static String VALID_COMMIT_ID = "2921eb6292eab0bd9ce8a42b44cf32fe9f4b0069";
     private final static String VALID_COMMIT_MESSAGE = "PRO-1234: Initial build of code."; 
-    private final static String VALID_COMMIT_TIME = "Mon, 21 May 2018 15:25:08 BST";
+    private final static String VALID_COMMIT_TIME = "Mon, 21 May 2018 14:25:08 UTC";
     
     private final static String EMPTY_VALUE = "";
     private ProbatePersistenceInfoContributor infoContributor = new ProbatePersistenceInfoContributor();
@@ -29,7 +29,12 @@ public class ProbatePersistenceInfoContributorTest {
             Info.Builder builder = new Info.Builder();
             infoContributor.contribute(builder);
             
+            
+            
             Map<String, String> gitMap = (Map<String, String>) builder.build().getDetails().get("git");
+            
+            System.out.println( "Date: " + gitMap.get("commitTime") );
+            
             assertEquals("Checking valid git commit id", VALID_COMMIT_ID, gitMap.get("commitId"));            
             assertEquals("Checking valid git commit message", VALID_COMMIT_MESSAGE, gitMap.get("commitMessage"));
             assertEquals("Checking valid git commit date", VALID_COMMIT_TIME, gitMap.get("commitTime"));
