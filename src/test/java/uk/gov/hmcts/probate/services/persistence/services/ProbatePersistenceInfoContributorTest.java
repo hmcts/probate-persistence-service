@@ -39,9 +39,6 @@ public class ProbatePersistenceInfoContributorTest {
         }
     }
     
-    /**
-     * Test to ensure null git commit id information is correctly processed.
-     */
     @Test
     public void testNullGitCommitValues() {
     	
@@ -60,9 +57,6 @@ public class ProbatePersistenceInfoContributorTest {
         }
     }  
 
-    /**
-     * Test to ensure empty git commit id information is correctly processed.
-     */
     @Test
     public void testPartialGitCommitValues() {
     	
