@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.info.Info;
@@ -35,6 +36,7 @@ public class ProbatePersistenceInfoContributor implements InfoContributor {
 		HashMap<String, String> results = new HashMap<String, String>();	
 		
 		try {
+			dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 			commitDateString = dateFormat.format(new Date(Long.parseLong(commitTime) * 1000 ));
 		} catch ( NumberFormatException nfe ) {
 			commitDateString = null;
