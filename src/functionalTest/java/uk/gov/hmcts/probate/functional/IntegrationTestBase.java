@@ -20,7 +20,7 @@ public abstract class IntegrationTestBase {
 
     @Autowired
     public void persistenceServiceUrl(@Value("${probate.persistence.url}") String persistenceServiceUrl) {
-        this.persistenceServiceUrl = persistenceServiceUrl.replaceAll("\'","");
+        this.persistenceServiceUrl = persistenceServiceUrl;
     }
 
     @Rule
