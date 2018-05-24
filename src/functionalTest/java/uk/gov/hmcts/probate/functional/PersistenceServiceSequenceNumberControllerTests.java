@@ -34,14 +34,14 @@ public class PersistenceServiceSequenceNumberControllerTests extends Integration
     private void validateGetSuccess(String registry) {
         SerenityRest.given()
                 .headers(utils.getHeaders())
-                .when().get("http://localhost:8282/sequence-number/" + registry)
+                .when().get(persistenceServiceUrl + "/sequence-number/" + registry)
                 .then().assertThat().statusCode(200);
     }
 
     private void validateGetFailure(String registry, String errorMessage, Integer statusCode) {
         Response response = SerenityRest.given()
                 .headers(utils.getHeaders())
-                .when().get("http://localhost:8282/sequence-number/" + registry)
+                .when().get(persistenceServiceUrl + "/sequence-number/" + registry)
                 .thenReturn();
 
         response.then().assertThat().statusCode(statusCode)
