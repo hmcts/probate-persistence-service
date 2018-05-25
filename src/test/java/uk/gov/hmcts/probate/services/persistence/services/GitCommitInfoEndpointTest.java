@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 
@@ -33,21 +35,22 @@ public class GitCommitInfoEndpointTest {
     //@Autowired
     //private WebApplicationContext context;
     
-    private MockMvc mvc;
+    private MockMvc mockMvc;
+
+    @Autowired
+    private WebApplicationContext context;
 
     @Before
     public void setup() {
-        //this.context.getBean(MetricsEndpoint.class).setEnabled(true);
-        //this.mvc = MockMvcBuilders.webAppContextSetup(this.context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
-        //this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-    } 
+        this.mockMvc = webAppContextSetup(context).build();
+    }
     
     @Test
     public void testGitCommitInfoEndpoint()
             throws Exception {
     	
     	try { 
-    	MvcResult result = this.mvc.perform(MockMvcRequestBuilders.get("/info"))
+    	MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/info"))
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();	
     	String actualInfoEndpointJsonResponse = result.getResponse().getContentAsString(); 
     	
