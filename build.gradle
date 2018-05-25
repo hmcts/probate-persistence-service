@@ -153,6 +153,10 @@ dependencies {
     functionalTestCompile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
     functionalTestCompile sourceSets.main.runtimeClasspath
     functionalTestCompile sourceSets.test.runtimeClasspath
+
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
+    smokeTestCompile sourceSets.main.runtimeClasspath
+    smokeTestCompile sourceSets.test.runtimeClasspath
 }
 
 compileJava {
