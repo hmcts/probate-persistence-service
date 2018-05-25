@@ -13,6 +13,7 @@ buildscript {
 
 plugins {
     id 'application'
+    id 'pmd'
     id 'org.springframework.boot' version '1.5.13.RELEASE'
     id 'org.owasp.dependencycheck' version '3.1.2'
     id 'com.github.ben-manes.versions' version '0.15.0'
@@ -61,7 +62,7 @@ tasks.withType(FindBugs) {
 }
 
 dependencyCheck {
-    suppressionFiles = ['dependency-check-suppressions.xml']
+    suppressionFiles = ['config/owasp/suppressions.xml']
 }
 
 findbugs{
@@ -117,6 +118,14 @@ task functional(type: Test) {
     testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
     finalizedBy aggregate
+}
+
+pmd {
+  toolVersion = "6.3.0"
+  ignoreFailures = true
+  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.integrationTest, sourceSets.smokeTest]
+  reportsDir = file("$project.buildDir/reports/pmd")
+  ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
 repositories {

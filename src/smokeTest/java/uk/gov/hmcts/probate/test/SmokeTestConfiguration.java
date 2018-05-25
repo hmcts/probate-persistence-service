@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate;
+package uk.gov.hmcts.probate.test;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

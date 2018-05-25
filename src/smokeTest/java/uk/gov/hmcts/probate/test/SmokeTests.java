@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate;
+package uk.gov.hmcts.probate.test;
 
 import io.restassured.RestAssured;
 import io.restassured.config.HttpClientConfig;

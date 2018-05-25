@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate.functional.util;
+package uk.gov.hmcts.probate.functional.test.util;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -6,7 +6,7 @@ import io.restassured.http.Headers;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.ResourceUtils;
-import uk.gov.hmcts.probate.functional.TestContextConfiguration;
+import uk.gov.hmcts.probate.functional.test.TestContextConfiguration;
 
 import java.io.File;
 import java.io.IOException;

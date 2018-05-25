@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate.functional;
+package uk.gov.hmcts.probate.functional.test;
 
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
