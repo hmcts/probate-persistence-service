@@ -36,7 +36,7 @@ public class GitCommitInfoEndpointTest {
 
     @Before
     public void setup() {
-        this.context.getBean(MetricsEndpoint.class).setEnabled(true);
+        //this.context.getBean(MetricsEndpoint.class).setEnabled(true);
         //this.mvc = MockMvcBuilders.webAppContextSetup(this.context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
         this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
     } 
