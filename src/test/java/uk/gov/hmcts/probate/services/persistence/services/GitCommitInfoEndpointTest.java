@@ -26,35 +26,35 @@ import net.minidev.json.parser.JSONParser;
 @RunWith(SpringRunner.class)
 @EnableAutoConfiguration
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = {"spring.info.git.location=classpath:uk/gov/hmcts/probate/services/persistence/git-test.properties"})
+//@TestPropertySource(properties = {"spring.info.git.location=classpath:uk/gov/hmcts/probate/services/persistence/git-test.properties"})
 public class GitCommitInfoEndpointTest {
 
 	private static final String EXPECTED_COMMIT_ID_INFO_RESPONSE = "0773f129ad51c4a23a49fec96fec0888883443f6";
 	private static final String EXPECTED_COMMIT_TIME_INFO_RESPONSE = "2018-05-23T13:59+1234";
 	
-    //private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    //@Autowired
-    //private WebApplicationContext context;
+    @Autowired
+    private WebApplicationContext context;
 
-    //@Before
-    //public void setup() {
-    //    this.mockMvc = webAppContextSetup(context).build();
-    //}
+    @Before
+    public void setup() {
+        this.mockMvc = webAppContextSetup(context).build();
+    }
     
     @Test
     public void testGitCommitInfoEndpoint()
             throws Exception {
     	
     	try { 
-    	//MvcResult result = this.mockMvc.perform(get("/info"))
-        //        .andExpect(status().isOk()).andReturn();	
-    	//String actualInfoEndpointJsonResponse = result.getResponse().getContentAsString(); 
+    	MvcResult result = this.mockMvc.perform(get("/info"))
+                .andExpect(status().isOk()).andReturn();	
+    	String actualInfoEndpointJsonResponse = result.getResponse().getContentAsString(); 
     	
-    	//JSONParser jsonParser = new JSONParser(JSONParser.MODE_PERMISSIVE);
-    	//JSONObject responseObj = (JSONObject) jsonParser.parse(actualInfoEndpointJsonResponse);
-    	//JSONObject gitObject = (JSONObject) responseObj.get("git");
-    	//JSONObject commitObject = (JSONObject) gitObject.get("commit");
+    	JSONParser jsonParser = new JSONParser(JSONParser.MODE_PERMISSIVE);
+    	JSONObject responseObj = (JSONObject) jsonParser.parse(actualInfoEndpointJsonResponse);
+    	JSONObject gitObject = (JSONObject) responseObj.get("git");
+    	JSONObject commitObject = (JSONObject) gitObject.get("commit");
     	
     	//assertEquals("Test commit id response is correct.",EXPECTED_COMMIT_ID_INFO_RESPONSE, commitObject.getAsString("id"));
     	//assertEquals("Test commit time response is correct.",EXPECTED_COMMIT_TIME_INFO_RESPONSE, commitObject.getAsString("time"));
