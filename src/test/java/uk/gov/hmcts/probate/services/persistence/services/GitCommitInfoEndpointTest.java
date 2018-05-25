@@ -1,25 +1,20 @@
 package uk.gov.hmcts.probate.services.persistence.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.MetricsEndpoint;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -32,9 +27,6 @@ public class GitCommitInfoEndpointTest {
 	private static final String EXPECTED_COMMIT_ID_INFO_RESPONSE = "0773f129ad51c4a23a49fec96fec0888883443f6";
 	private static final String EXPECTED_COMMIT_TIME_INFO_RESPONSE = "2018-05-23T13:59+1234";
 	
-    //@Autowired
-    //private WebApplicationContext context;
-    
     private MockMvc mockMvc;
 
     @Autowired
@@ -50,8 +42,8 @@ public class GitCommitInfoEndpointTest {
             throws Exception {
     	
     	try { 
-    	MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.get("/info"))
-                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();	
+    	MvcResult result = this.mockMvc.perform(get("/info"))
+                .andExpect(status().isOk()).andReturn();	
     	String actualInfoEndpointJsonResponse = result.getResponse().getContentAsString(); 
     	
     	JSONParser jsonParser = new JSONParser(JSONParser.MODE_PERMISSIVE);
