@@ -1,9 +1,14 @@
 .idea/
 *.iml
+.settings
+.project
+.classpath
 target/
 .DS_Store
+git.properties
 /nbactions.xml
 .gradle/
 build/
+bin/
 out/
 classes/
