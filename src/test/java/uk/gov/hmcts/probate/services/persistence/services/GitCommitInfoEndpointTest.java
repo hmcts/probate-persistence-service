@@ -23,6 +23,7 @@ import net.minidev.json.parser.JSONParser;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@DirtiesContext
 @TestPropertySource(properties = {"spring.info.git.location=classpath:uk/gov/hmcts/probate/services/persistence/git-test.properties"})
 public class GitCommitInfoEndpointTest {
 
