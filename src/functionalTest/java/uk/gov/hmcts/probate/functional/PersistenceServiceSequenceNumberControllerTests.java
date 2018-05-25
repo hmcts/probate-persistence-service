@@ -32,14 +32,14 @@ public class PersistenceServiceSequenceNumberControllerTests extends Integration
     }
 
     private void validateGetSuccess(String registry) {
-        SerenityRest.given()
+        SerenityRest.given().relaxedHTTPSValidation()
                 .headers(utils.getHeaders())
                 .when().get(persistenceServiceUrl + "/sequence-number/" + registry)
                 .then().assertThat().statusCode(200);
     }
 
     private void validateGetFailure(String registry, String errorMessage, Integer statusCode) {
-        Response response = SerenityRest.given()
+        Response response = SerenityRest.given().relaxedHTTPSValidation()
                 .headers(utils.getHeaders())
                 .when().get(persistenceServiceUrl + "/sequence-number/" + registry)
                 .thenReturn();
