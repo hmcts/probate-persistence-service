@@ -24,15 +24,14 @@ import net.minidev.json.parser.JSONParser;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @TestPropertySource(properties = {"spring.info.git.location=classpath:uk/gov/hmcts/probate/services/persistence/git-test.properties"})
 public class GitCommitInfoEndpointTest {
 
 	private static final String EXPECTED_COMMIT_ID_INFO_RESPONSE = "0773f129ad51c4a23a49fec96fec0888883443f6";
 	private static final String EXPECTED_COMMIT_TIME_INFO_RESPONSE = "2018-05-23T13:59+1234";
 	
-    @Autowired
-    private WebApplicationContext context;
+    //@Autowired
+    //private WebApplicationContext context;
     
     private MockMvc mvc;
 
@@ -40,7 +39,7 @@ public class GitCommitInfoEndpointTest {
     public void setup() {
         //this.context.getBean(MetricsEndpoint.class).setEnabled(true);
         //this.mvc = MockMvcBuilders.webAppContextSetup(this.context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
-        this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+        //this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
     } 
     
     @Test
