@@ -33,7 +33,7 @@ gitProperties {
 }
 
 group = 'uk.gov.hmcts.probate'
-version = "3.0.0"
+version = "4.1.0"
 mainClassName = 'uk.gov.hmcts.probate.services.persistence.Application'
 
 sourceCompatibility = 1.8
