@@ -81,6 +81,14 @@ dependencyCheck {
 }
 
 sourceSets {
+    smokeTest {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDir file('src/smokeTest/java')
+        }
+        resources.srcDir file('src/smokeTest/resources')
+    }
     functionalTest {
         java {
             compileClasspath += main.output
@@ -89,6 +97,12 @@ sourceSets {
         }
         resources.srcDir file('src/test/resources')
     }
+}
+
+task smoke(type: Test) {
+  description = "Runs Smoke Tests"
+  testClassesDirs = sourceSets.smokeTest.output.classesDirs
+  classpath = sourceSets.smokeTest.runtimeClasspath
 }
 
 task functional(type: Test) {
