@@ -2,6 +2,7 @@ package uk.gov.hmcts.probate.services.persistence.services;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,11 +39,13 @@ public class GitCommitInfoEndpointTest {
         this.context.getBean(MetricsEndpoint.class).setEnabled(true);
         //this.mvc = MockMvcBuilders.webAppContextSetup(this.context).apply(SecurityMockMvcConfigurers.springSecurity()).build();
         this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-    }
+    } 
     
     @Test
     public void testGitCommitInfoEndpoint()
             throws Exception {
+    	
+    	try { 
     	MvcResult result = this.mvc.perform(MockMvcRequestBuilders.get("/info"))
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();	
     	String actualInfoEndpointJsonResponse = result.getResponse().getContentAsString(); 
@@ -54,6 +57,10 @@ public class GitCommitInfoEndpointTest {
     	
     	assertEquals("Test commit id response is correct.",EXPECTED_COMMIT_ID_INFO_RESPONSE, commitObject.getAsString("id"));
     	assertEquals("Test commit time response is correct.",EXPECTED_COMMIT_TIME_INFO_RESPONSE, commitObject.getAsString("time"));
+    	
+    	} catch ( Exception e ) {
+    		e.printStackTrace();
+    	}
     }
 }
 
