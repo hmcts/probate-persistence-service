@@ -1,16 +1,11 @@
+import java.util.stream.Collectors
+
 buildscript {
-    repositories {
-        mavenLocal()
-        maven { url "http://artifactory.reform.hmcts.net/artifactory/libs-release" }
-        maven { url "http://repo1.maven.org/maven2/" }
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
     dependencies {
         classpath group: 'org.sonarsource.scanner.gradle', name: 'sonarqube-gradle-plugin', version: '2.5'
         classpath("net.serenity-bdd:serenity-gradle-plugin:1.5.2")
     }
 }
-
 plugins {
     id 'application'
     id 'pmd'
@@ -123,21 +118,32 @@ task functional(type: Test) {
 pmd {
   toolVersion = "6.3.0"
   ignoreFailures = true
-  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.smokeTest]
+  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.testFunctional, sourceSets.testSmoke]
   reportsDir = file("$project.buildDir/reports/pmd")
   ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
 repositories {
     mavenLocal()
-    mavenCentral()
+    maven {
+      url "https://dl.bintray.com/hmcts/hmcts-maven"
+    }
+    maven {
+      url 'https://repo.spring.io/libs-milestone'
+    }
     jcenter()
-    maven { url "http://artifactory.reform.hmcts.net/artifactory/libs-release" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    maven { url "http://repo1.maven.org/maven2/" }
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url  "https://dl.bintray.com/hmcts/hmcts-maven" }
 }
+
+// repositories {
+//     mavenLocal()
+//     mavenCentral()
+//     jcenter()
+//     maven { url "http://artifactory.reform.hmcts.net/artifactory/libs-release" }
+//     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+//     maven { url "http://repo1.maven.org/maven2/" }
+//     maven { url "https://plugins.gradle.org/m2/" }
+//     maven { url  "https://dl.bintray.com/hmcts/hmcts-maven" }
+// }
 
 def versions = [
         logging: '2.2.1'
