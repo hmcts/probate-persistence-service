@@ -1,4 +1,4 @@
-package uk.gov.hmcts.probate.services.persistence.services;
+package uk.gov.hmcts.probate.services.persistence.endpoint;
 
 import static org.junit.Assert.assertEquals;
 
