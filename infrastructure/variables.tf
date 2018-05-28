@@ -69,5 +69,25 @@ variable "log_level" {
   default = "INFO"
 }
 
+variable "component" {
+  type = "string"
+}
+
+////////////////////////////////
+// Database
+////////////////////////////////
+
+variable "postgresql_user" {
+  default = "probate"
+}
+
+variable "database_name" {
+  default = "probate_data_store"
+}
+
+variable "use_uk_db" {
+  type = "string"
+  default = "false"
+}
 
 
