@@ -1,31 +1,27 @@
+import java.util.stream.Collectors
+
 buildscript {
-    repositories {
-        mavenLocal()
-        maven { url "http://artifactory.reform.hmcts.net/artifactory/libs-release" }
-        maven { url "http://repo1.maven.org/maven2/" }
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
     dependencies {
         classpath group: 'org.sonarsource.scanner.gradle', name: 'sonarqube-gradle-plugin', version: '2.5'
         classpath("net.serenity-bdd:serenity-gradle-plugin:1.5.2")
     }
 }
-
 plugins {
     id 'application'
     id 'pmd'
+    id 'jacoco'
     id 'org.springframework.boot' version '1.5.13.RELEASE'
     id 'org.owasp.dependencycheck' version '3.1.2'
     id 'com.github.ben-manes.versions' version '0.15.0'
-    id 'org.liquibase.gradle' version '1.2.4'
     id 'com.gorylenko.gradle-git-properties' version '1.4.21'
 }
 
 apply plugin: 'org.sonarqube'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
-apply plugin: 'liquibase'
 apply plugin: 'net.serenity-bdd.aggregator'
+
+apply from: 'liquibase.gradle'
 
 gitProperties {
     keys = ['git.commit.id','git.commit.time']
@@ -61,9 +57,6 @@ tasks.withType(FindBugs) {
     }
 }
 
-dependencyCheck {
-    suppressionFiles = ['config/owasp/suppressions.xml']
-}
 
 findbugs{
     ignoreFailures=true
@@ -85,7 +78,11 @@ dependencyCheck {
     // Specifies if the build should be failed if a CVSS score above a specified level is identified.
     // range of 0-10 fails the build, anything greater and it doesn't fail the build
     failBuildOnCVSS = System.getProperty('dependencyCheck.failBuild') == 'true' ? 0 : 11
-    suppressionFile = 'dependency-check-suppressions.xml'
+    suppressionFiles = ['config/owasp/suppressions.xml']
+    analyzers {
+      // Disable scanning of .NET related binaries
+      assemblyEnabled = false
+    }
 }
 
 sourceSets {
@@ -123,21 +120,31 @@ task functional(type: Test) {
 pmd {
   toolVersion = "6.3.0"
   ignoreFailures = true
-  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.smokeTest]
+  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.testFunctional, sourceSets.testSmoke]
   reportsDir = file("$project.buildDir/reports/pmd")
   ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
+jacocoTestReport {
+    executionData(test)
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        xml.destination = file("${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+    }
+}
+
 repositories {
     mavenLocal()
-    mavenCentral()
+    maven {
+      url "https://dl.bintray.com/hmcts/hmcts-maven"
+    }
+    maven {
+      url 'https://repo.spring.io/libs-milestone'
+    }
     jcenter()
-    maven { url "http://artifactory.reform.hmcts.net/artifactory/libs-release" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    maven { url "http://repo1.maven.org/maven2/" }
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url  "https://dl.bintray.com/hmcts/hmcts-maven" }
 }
+
 
 def versions = [
         logging: '2.2.1'
@@ -152,8 +159,6 @@ dependencies {
     compile ('org.postgresql:postgresql:42.2.2') {
         exclude module: 'slf4j-simple'
     }
-
-    compile group: 'org.liquibase.ext', name:'liquibase-hibernate5', version: '3.6'
 
     compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging

@@ -197,4 +197,17 @@ databaseChangeLog:
     - createSequence:
         sequenceName: oxford_sequence
         startValue: 10000
-
+#- changeSet:
+#  id: 19
+#  author: praveen
+#  changes:
+#  - sqlFile:
+#      dbms: postgreSQL
+#      encoding: utf8
+#      endDelimiter: \nGO
+#      path: "scripts/probate_refernce_migration.sql"
+#      relativeToChangelogFile: true
+#      splitStatements: false
+#      stripComments: false
+#  - addNotNullConstraint:
+#      tableName:

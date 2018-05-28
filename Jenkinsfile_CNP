@@ -23,5 +23,6 @@ withPipeline("java", product, component) {
     error 'Deliberately breaking pipeline to prevent prod deployment'
   }
   loadVaultSecrets(secrets)
+  enableDbMigration()
   //enableSlackNotifications('#probate-jenkins')
 }

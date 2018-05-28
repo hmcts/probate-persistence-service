@@ -1,7 +1,11 @@
+output "microserviceName" {
+  value = "${local.app_full_name}"
+}
+
 output "vaultUri" {
-  value = "${module.probate-persistence-service-vault.key_vault_uri}"
+  value = "${local.vaultUri}"
 }
 
 output "vaultName" {
-  value = "${module.probate-persistence-service-vault.key_vault_name}"
+  value = "${local.vaultName}"
 }
