@@ -52,15 +52,6 @@ variable "no_proxy" {
 }
 
 
-variable "probate_postgresql_hostname" {
-  type = "string"
-}
-
-variable "probate_postgresql_port" {
-  type = "string"
-}
-
-
 variable "probate_postgresql_show_sql" {
   default = "false"
 }
