@@ -25,6 +25,14 @@ data "vault_generic_secret" "spring_application_json_persistence_service" {
   path = "secret/${var.vault_section}/probate/spring_application_json_persistence_service"
 }
 
+data "vault_generic_secret" "probate_postgresql_hostname" {
+  path = "secret/${var.vault_section}/probate/probate_postgresql_hostname"
+}
+
+data "vault_generic_secret" "probate_postgresql_port" {
+  path = "secret/${var.vault_section}/probate/probate_postgresql_port"
+}
+
 locals {
   aseName = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
   //java_proxy_variables: "-Dhttp.proxyHost=${var.proxy_host} -Dhttp.proxyPort=${var.proxy_port} -Dhttps.proxyHost=${var.proxy_host} -Dhttps.proxyPort=${var.proxy_port}"
@@ -54,8 +62,8 @@ module "probate-persistence-service" {
     PROBATE_POSTGRESQL_PASSWORD = "${data.vault_generic_secret.probate_postgresql_password.data["value"]}"
     PROBATE_POSTGRESQL_DATABASE = "${data.vault_generic_secret.probate_postgresql_database.data["value"]}"
     SPRING_APPLICATION_JSON = "${data.vault_generic_secret.spring_application_json_persistence_service.data["value"]}"
-    PROBATE_POSTGRESQL_HOSTNAME = "${var.probate_postgresql_hostname}"
-    PROBATE_POSTGRESQL_PORT = "${var.probate_postgresql_port}"
+    PROBATE_POSTGRESQL_HOSTNAME =  "${data.vault_generic_secret.probate_postgresql_hostname.data["value"]}"
+    PROBATE_POSTGRESQL_PORT = "${data.vault_generic_secret.probate_postgresql_port.data["value"]}"
     PROBATE_PERSISTENCE_SHOW_SQL = "${var.probate_postgresql_show_sql}"
     
     java_app_name = "${var.microservice}"
