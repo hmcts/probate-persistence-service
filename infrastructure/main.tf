@@ -25,6 +25,14 @@ data "vault_generic_secret" "spring_application_json_persistence_service" {
   path = "secret/${var.vault_section}/probate/spring_application_json_persistence_service"
 }
 
+data "vault_generic_secret" "probate_postgresql_hostname" {
+  path = "secret/${var.vault_section}/probate/probate_postgresql_hostname"
+}
+
+data "vault_generic_secret" "probate_postgresql_port" {
+  path = "secret/${var.vault_section}/probate/probate_postgresql_port"
+}
+
 locals {
   aseName = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
   app_full_name = "${var.product}-${var.component}"
@@ -65,8 +73,8 @@ module "probate-persistence-service" {
     PROBATE_POSTGRESQL_PASSWORD = "${data.vault_generic_secret.probate_postgresql_password.data["value"]}"
     PROBATE_POSTGRESQL_DATABASE = "${data.vault_generic_secret.probate_postgresql_database.data["value"]}"
     SPRING_APPLICATION_JSON = "${data.vault_generic_secret.spring_application_json_persistence_service.data["value"]}"
-    PROBATE_POSTGRESQL_HOSTNAME = "${var.probate_postgresql_hostname}"
-    PROBATE_POSTGRESQL_PORT = "${var.probate_postgresql_port}"
+    PROBATE_POSTGRESQL_HOSTNAME =  "${data.vault_generic_secret.probate_postgresql_hostname.data["value"]}"
+    PROBATE_POSTGRESQL_PORT = "${data.vault_generic_secret.probate_postgresql_port.data["value"]}"
     PROBATE_PERSISTENCE_SHOW_SQL = "${var.probate_postgresql_show_sql}"
     
     java_app_name = "${var.microservice}"
@@ -106,13 +114,13 @@ resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
   name = "${local.app_full_name}-POSTGRES-HOST"
-  value = "${var.probate_postgresql_hostname}"
+  value = "${data.vault_generic_secret.probate_postgresql_hostname.data["value"]}"
   vault_uri = "${module.probate-persistence-service-vault}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
   name = "${local.app_full_name}-POSTGRES-PORT"
-  value = "${var.probate_postgresql_port}"
+  value = "${data.vault_generic_secret.probate_postgresql_port.data["value"]}"
   vault_uri = "${module.probate-persistence-service-vault}"
 }
 
