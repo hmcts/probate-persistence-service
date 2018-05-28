@@ -1,7 +1,7 @@
 language: java
 
-#services:
-#  - docker
+services:
+  - docker
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -17,7 +17,7 @@ before_install:
 
 script:
   - ./gradlew test
-  - ./gradlew integration
+#  - ./gradlew integration
   - ./gradlew check
   - ./gradlew jacocoTestReport
 
