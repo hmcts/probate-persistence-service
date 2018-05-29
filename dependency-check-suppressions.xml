@@ -18,4 +18,56 @@
 
   -->
 
+  <suppress>
+    <notes><![CDATA[
+   file name: spring-boot-starter-data-rest-1.5.13.RELEASE.jar contains spring_data_rest:2.6.12.RELEASE
+   ]]></notes>
+    <gav regex="true">^org\.springframework\.boot:spring-boot-starter-data-rest:.*$</gav>
+    <cpe>cpe:/a:pivotal_software:spring_data_rest</cpe>
+  </suppress>
+
+  <suppress>
+    <notes><![CDATA[
+   file name: spring-boot-starter-data-rest-1.5.13.RELEASE.jar contains spring-data-commons:1.13.12.RELEASE
+   ]]></notes>
+    <gav regex="true">^org\.springframework\.boot:spring-boot-starter-data-rest:.*$</gav>
+    <cpe>cpe:/a:pivotal_software:spring_boot</cpe>
+  </suppress>
+
+  <suppress>
+    <notes><![CDATA[
+   file name: tomcat-annotations-api-8.5.31.jar
+   https://github.com/spring-projects/spring-boot/issues/11110
+   ]]></notes>
+    <gav regex="true">^org\.apache\.tomcat:tomcat-annotations-api:.*$</gav>
+    <cve>CVE-2016-5425</cve>
+  </suppress>
+
+  <suppress>
+    <notes><![CDATA[
+   file name: tomcat-annotations-api-8.5.31.jar
+   https://github.com/spring-projects/spring-boot/issues/11110
+   ]]></notes>
+    <gav regex="true">^org\.apache\.tomcat:tomcat-annotations-api:.*$</gav>
+    <cve>CVE-2016-6325</cve>
+  </suppress>
+
+  <suppress>
+    <notes><![CDATA[
+   file name: tomcat-annotations-api-8.5.31.jar
+   https://github.com/spring-projects/spring-boot/issues/11110
+   ]]></notes>
+    <gav regex="true">^org\.apache\.tomcat:tomcat-annotations-api:.*$</gav>
+    <cve>CVE-2017-6056</cve>
+  </suppress>
+
+  <suppress>
+    <notes><![CDATA[
+   file name: postgresql-42.2.2.jar
+   N/A - exists in SUSE linux
+   ]]></notes>
+    <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
+    <cve>CVE-2017-14798</cve>
+  </suppress>
+  
 </suppressions>
