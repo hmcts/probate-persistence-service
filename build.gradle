@@ -57,10 +57,6 @@ tasks.withType(FindBugs) {
     }
 }
 
-//dependencyCheck {
-//    suppressionFiles = ['config/owasp/suppressions.xml']
-//}
-
 findbugs{
     ignoreFailures=true
     reportLevel = "low"
@@ -76,12 +72,10 @@ sonarqube {
 
 test.finalizedBy jacocoTestReport
 
-// https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/configuration.html
 dependencyCheck {
-    // Specifies if the build should be failed if a CVSS score above a specified level is identified.
-    // range of 0-10 fails the build, anything greater and it doesn't fail the build
     failBuildOnCVSS = System.getProperty('dependencyCheck.failBuild') == 'true' ? 0 : 11
-    suppressionFile = 'dependency-check-suppressions.xml'
+    suppressionFile = 'config/owasp/suppressions.xml'
+    scanConfigurations = ['compile']
 }
 
 sourceSets {
@@ -154,7 +148,7 @@ dependencies {
     compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
 
-    compile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
+    testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 
