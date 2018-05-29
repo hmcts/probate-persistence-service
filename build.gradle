@@ -154,7 +154,7 @@ dependencies {
     compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
 
-    compile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
+    testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 
