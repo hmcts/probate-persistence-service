@@ -11,6 +11,4 @@ import uk.gov.hmcts.probate.services.persistence.model.Submission;
 public interface SubmissionRepository extends PagingAndSortingRepository<Submission, Long> {
 
     Submission findById(@Param("id") Long id);
-
-    Formdata findBySubmissionReference(@Param("submissionReference") long submissionReference);
 }
