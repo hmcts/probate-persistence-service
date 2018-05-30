@@ -134,7 +134,7 @@ repositories {
 distributions {
     main {
         contents {
-            from(file("$projectDir/lib/AI-Agent.xml")) {
+            from(file("$projectDir/libs/AI-Agent.xml")) {
                 into "lib"
             }
         }
