@@ -129,13 +129,9 @@ repositories {
 
 }
 
-distributions {
-    main {
-        contents {
-            from(file("$projectDir/libs/AI-Agent.xml")) {
-                into "libs"
-            }
-        }
+processResources {
+    from ('src/lib/AI-Agent.xml') {
+        into 'lib'
     }
 }
 
