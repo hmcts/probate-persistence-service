@@ -136,7 +136,13 @@ repositories {
     mavenLocal()
     maven { url "https://dl.bintray.com/hmcts/hmcts-maven" }
     maven { url 'https://repo.spring.io/libs-milestone' }
-    jcenter()
+}
+
+
+processResources {
+    from ('src/lib/AI-Agent.xml') {
+        into 'lib'
+    }
 }
 
 def versions = [
@@ -153,10 +159,14 @@ dependencies {
         exclude module: 'slf4j-simple'
     }
 
+//    compile group: 'org.liquibase.ext', name:'liquibase-hibernate5', version: '3.6'
+//    compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: versions.logging
     compile group: 'org.liquibase.ext', name:'liquibase-hibernate5', version: '3.6'
-
     compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
+    compile group: 'uk.gov.hmcts.reform', name: 'java-logging-spring', version: versions.logging
+    compile group: 'uk.gov.hmcts.reform', name: 'java-logging-httpcomponents', version: versions.logging
+    compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
 
     testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
