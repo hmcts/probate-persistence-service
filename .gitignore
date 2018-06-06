@@ -2,8 +2,13 @@
 *.iml
 target/
 .DS_Store
+git.properties
+.project
+.classpath
 /nbactions.xml
 .gradle/
 build/
+.settings/
+bin/
 out/
 classes/
