@@ -76,6 +76,10 @@ dependencyCheck {
     failBuildOnCVSS = System.getProperty('dependencyCheck.failBuild') == 'true' ? 0 : 11
     suppressionFile = 'config/owasp/suppressions.xml'
     scanConfigurations = ['compile']
+    analyzers {
+        // Disable scanning of .NET related binaries
+        assemblyEnabled = false
+    }
 }
 
 sourceSets {
@@ -118,15 +122,21 @@ pmd {
   ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
+jacocoTestReport {
+    executionData(test)
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        xml.destination = file("${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+    }
+    
+}
+
 repositories {
     mavenLocal()
-    mavenCentral()
+    maven { url "https://dl.bintray.com/hmcts/hmcts-maven" }
+    maven { url 'https://repo.spring.io/libs-milestone' }
     jcenter()
-    maven { url "http://artifactory.reform.hmcts.net/artifactory/libs-release" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    maven { url "http://repo1.maven.org/maven2/" }
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url  "https://dl.bintray.com/hmcts/hmcts-maven" }
 }
 
 def versions = [
