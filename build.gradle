@@ -40,6 +40,7 @@ apply plugin: 'jacoco'
 apply plugin: 'liquibase'
 
 gitProperties {
+    gitPropertiesDir = new File("${project.rootDir}/src/main/resources/uk/gov/hmcts/probate/services/persistence")
     keys = ['git.commit.id','git.commit.time']
     dateFormat = "yyyy-MM-dd'T'HH:mmZ"
     dateFormatTimeZone = "GMT"
@@ -131,7 +132,7 @@ dependencies {
 
     compile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'   
 }
 
 compileJava {
