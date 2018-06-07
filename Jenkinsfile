@@ -99,7 +99,7 @@ node {
 
         if(storeRPMToArtifactory) {
             stage('Package (RPM)') {
-                probateBackendPersistenceServiceRPMVersion = packager.javaRPM(app, 'build/libs/persistence-service-$(./gradlew -q printVersion).jar',
+                probateBackendPersistenceServiceRPMVersion = packager.javaRPM(app, 'build/libs/persistence-service.jar',
                         'springboot', 'src/main/resources/application.yml')
                 sh "echo $probateBackendPersistenceServiceRPMVersion"
                 version = "{probate_persistence_buildnumber: ${probateBackendPersistenceServiceRPMVersion} }"
