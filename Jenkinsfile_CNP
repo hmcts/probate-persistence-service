@@ -24,4 +24,35 @@ withPipeline("java", product, component) {
   }
   loadVaultSecrets(secrets)
   //enableSlackNotifications('#probate-jenkins')
+  after('test') {
+    publishHTML target: [
+            alwaysLinkToLastBuild: true,
+            reportDir            : "build/reports/tests/test",
+            reportFiles          : "index.html",
+            reportName           : "sol-ccd-service Test Report"
+    ]
+
+    publishHTML target: [
+            alwaysLinkToLastBuild: true,
+            reportDir            : "build/reports/jacoco",
+            reportFiles          : "index.html",
+            reportName           : "sol-ccd-service Code Coverage Report"
+    ]
+
+    publishHTML target: [
+            alwaysLinkToLastBuild: true,
+            reportDir            : "build/reports/findbugs",
+            reportFiles          : "main.html",
+            reportName           : "sol-ccd-service find Bugs Report"
+    ]
+  }
+
+  after('functionalTest:saat') {
+      publishHTML target: [
+              reportDir            : "target/site/serenity/",
+              reportFiles          : "index.html",
+              reportName           : "SAAT Functional Tests",
+              alwaysLinkToLastBuild: true
+      ]
+  }
 }

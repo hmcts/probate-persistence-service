@@ -99,7 +99,7 @@ node {
 
         if(storeRPMToArtifactory) {
             stage('Package (RPM)') {
-                probateBackendPersistenceServiceRPMVersion = packager.javaRPM(app, 'build/libs/persistence-service-$(./gradlew -q printVersion).jar',
+                probateBackendPersistenceServiceRPMVersion = packager.javaRPM(app, 'build/libs/persistence-service.jar',
                         'springboot', 'src/main/resources/application.yml')
                 sh "echo $probateBackendPersistenceServiceRPMVersion"
                 version = "{probate_persistence_buildnumber: ${probateBackendPersistenceServiceRPMVersion} }"
@@ -112,19 +112,19 @@ node {
             packager.publishJavaRPM(app)
         }
 
-        if ("develop"  == "${env.BRANCH_NAME}") {
-            stage('Install (Dev)') {
-                ansible.runInstallPlaybook(version, 'dev')
+        if ("master"  == "${env.BRANCH_NAME}") {
+            stage('Install (Test)') {
+                ansible.runInstallPlaybook(version, 'test')
             }
-            stage('Deploy (Dev)') {
-                ansible.runDeployPlaybook(version, 'dev')
+            stage('Deploy (Test)') {
+                ansible.runDeployPlaybook(version, 'test')
             }
-            stage('Tag Deploy success (Dev)') {
-                rpmTagger.tagDeploymentSuccessfulOn('dev')
+            stage('Tag Deploy success (Test)') {
+                rpmTagger.tagDeploymentSuccessfulOn('test')
             }
             stage('Smoke Test') {
                 ws('workspace/probate-frontend/build') {
-                    env.PROBATE_FRONTEND_URL = "https://www-" + 'dev' + ".probate.reform.hmcts.net/"
+                    env.PROBATE_FRONTEND_URL = "https://www-" + 'test' + ".probate.reform.hmcts.net/"
                     git url: 'git@git.reform.hmcts.net:probate/smoke-tests.git'
                     sh '''
                     npm install 
