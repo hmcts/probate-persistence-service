@@ -7,7 +7,7 @@ RUN chmod +x /usr/local/bin/wait-for-it.sh
 
 
 COPY docker/entrypoint.sh /
-COPY build/libs/persistence-service*.jar /persistence-service.jar
+COPY build/libs/persistence-service.jar /persistence-service.jar
 
 HEALTHCHECK --interval=10s --timeout=10s --retries=10 CMD http_proxy= curl --silent --fail http://localhost:8282/health
 
