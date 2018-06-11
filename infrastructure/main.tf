@@ -61,8 +61,7 @@ module "probate-persistence-service" {
   capacity     = "${var.capacity}"
 
   app_settings = {
-
-	  // Logging vars
+     // Logging vars
     REFORM_TEAM = "${var.product}"
     REFORM_SERVICE_NAME = "${var.microservice}"
     REFORM_ENVIRONMENT = "${var.env}"
