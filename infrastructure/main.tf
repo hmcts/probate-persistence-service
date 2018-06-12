@@ -71,7 +71,7 @@ module "probate-persistence-service" {
 
     PROBATE_POSTGRESQL_USER = "${module.probate-persistence-db.user_name}"
     PROBATE_POSTGRESQL_PASSWORD = "${module.probate-persistence-db.postgresql_password}"
-    PROBATE_POSTGRESQL_DATABASE = "${module.probate-persistence-db.postgresql_database}"
+    PROBATE_POSTGRESQL_DATABASE = "${module.probate-persistence-db.postgresql_database}?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
     SPRING_APPLICATION_JSON = "${data.vault_generic_secret.spring_application_json_persistence_service.data["value"]}"
     PROBATE_POSTGRESQL_HOSTNAME =  "${module.probate-persistence-db.host_name}"
     PROBATE_POSTGRESQL_PORT = "${module.probate-persistence-db.postgresql_listen_port}"
