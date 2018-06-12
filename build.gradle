@@ -13,14 +13,12 @@ plugins {
     id 'org.springframework.boot' version '1.5.13.RELEASE'
     id 'org.owasp.dependencycheck' version '3.2.1'
     id 'com.github.ben-manes.versions' version '0.15.0'
-    id 'org.liquibase.gradle' version '1.2.4'
     id 'com.gorylenko.gradle-git-properties' version '1.4.21'
 }
 
 apply plugin: 'org.sonarqube'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
-apply plugin: 'liquibase'
 apply plugin: 'net.serenity-bdd.aggregator'
 
 gitProperties {
@@ -160,9 +158,6 @@ dependencies {
         exclude module: 'slf4j-simple'
     }
 
-//    compile group: 'org.liquibase.ext', name:'liquibase-hibernate5', version: '3.6'
-//    compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: versions.logging
-    compile group: 'org.liquibase.ext', name:'liquibase-hibernate5', version: '3.6'
     compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-spring', version: versions.logging
