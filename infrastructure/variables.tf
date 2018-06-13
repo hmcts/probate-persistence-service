@@ -64,3 +64,6 @@ variable "capacity" {
   default = "1"
 }
 
+variable "liquibase_at_startup" {
+  default = "false"
+}
