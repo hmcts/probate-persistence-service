@@ -53,13 +53,13 @@
     <cve>CVE-2017-14798</cve>
   </suppress>
 
-  <suppress>
+  <!-- <suppress>
     <notes><![CDATA[
    file name: h2-1.4.197.jar
    used by liquibase
    ]]></notes>
     <gav regex="true">^com\.h2database:h2:.*$</gav>
     <cpe>cpe:/a:h2database:h2</cpe>
-  </suppress>
+  </suppress> -->
 
 </suppressions>

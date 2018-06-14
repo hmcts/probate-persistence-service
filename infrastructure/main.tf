@@ -59,6 +59,7 @@ module "probate-persistence-service" {
   subscription = "${var.subscription}"
   asp_name     = "${var.product}-${var.env}-asp"
   capacity     = "${var.capacity}"
+  appinsights_instrumentation_key = "${var.appinsights_instrumentation_key}"
 
   app_settings = {
      // Logging vars
