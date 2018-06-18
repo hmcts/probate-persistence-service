@@ -59,10 +59,10 @@ module "probate-persistence-service" {
   subscription = "${var.subscription}"
   asp_name     = "${var.product}-${var.env}-asp"
   capacity     = "${var.capacity}"
+  appinsights_instrumentation_key = "${var.appinsights_instrumentation_key}"
 
   app_settings = {
-
-	  // Logging vars
+     // Logging vars
     REFORM_TEAM = "${var.product}"
     REFORM_SERVICE_NAME = "${var.microservice}"
     REFORM_ENVIRONMENT = "${var.env}"
@@ -72,12 +72,12 @@ module "probate-persistence-service" {
 
     PROBATE_POSTGRESQL_USER = "${module.probate-persistence-db.user_name}"
     PROBATE_POSTGRESQL_PASSWORD = "${module.probate-persistence-db.postgresql_password}"
-    PROBATE_POSTGRESQL_DATABASE = "${module.probate-persistence-db.postgresql_database}"
+    PROBATE_POSTGRESQL_DATABASE = "${module.probate-persistence-db.postgresql_database}?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
     SPRING_APPLICATION_JSON = "${data.vault_generic_secret.spring_application_json_persistence_service.data["value"]}"
     PROBATE_POSTGRESQL_HOSTNAME =  "${module.probate-persistence-db.host_name}"
     PROBATE_POSTGRESQL_PORT = "${module.probate-persistence-db.postgresql_listen_port}"
     PROBATE_PERSISTENCE_SHOW_SQL = "${var.probate_postgresql_show_sql}"
-    
+    LIQUIBASE_AT_STARTUP = "${var.liquibase_at_startup}"
     java_app_name = "${var.microservice}"
     LOG_LEVEL = "${var.log_level}"
     //ROOT_APPENDER = "JSON_CONSOLE" //Remove json logging

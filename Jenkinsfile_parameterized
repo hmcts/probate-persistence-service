@@ -29,6 +29,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 withParameterizedPipeline('java', product, component, params.ENVIRONMENT, 'sandbox') {
     loadVaultSecrets(secrets)
+    enableDbMigration() // for liquibase update
     after('test') {
         publishHTML target: [
                 alwaysLinkToLastBuild: true,

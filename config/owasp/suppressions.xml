@@ -55,11 +55,10 @@
 
   <suppress>
     <notes><![CDATA[
-   file name: h2-1.4.197.jar
-   used by liquibase
+   file name: postgresql-42.2.2.jar
    ]]></notes>
-    <gav regex="true">^com\.h2database:h2:.*$</gav>
-    <cpe>cpe:/a:h2database:h2</cpe>
+    <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
+    <cve>CVE-2018-1115</cve>u
   </suppress>
 
 </suppressions>

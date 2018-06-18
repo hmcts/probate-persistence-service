@@ -23,6 +23,7 @@ spring:
 
   database.driverClassName: org.postgresql.Driver
 
+
 server:
   port: ${probate.persistence.port}
 
@@ -39,4 +40,7 @@ logging:
 
 azure:
   app_insights_key: ${APPINSIGHTS_INSTRUMENTATIONKEY:false}
+
+liquibase:
+  enabled: ${LIQUIBASE_AT_STARTUP:false}
 
