@@ -1,9 +1,11 @@
-package uk.gov.hmcts.probate.services.persistence.services;
+package uk.gov.hmcts.probate.services.persistence.repository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.gov.hmcts.probate.services.persistence.TestUtils.getJsonFromFile;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,10 @@ import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import uk.gov.hmcts.probate.services.persistence.repository.RepositoryTestConfiguration;
-import uk.gov.hmcts.probate.services.persistence.repository.TestJavaObjectSerializer;
-import uk.gov.hmcts.probate.services.persistence.repository.TestJsonDataTypeHandler;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
@@ -27,28 +26,42 @@ import uk.gov.hmcts.probate.services.persistence.repository.TestJsonDataTypeHand
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @ContextConfiguration(classes = {RepositoryTestConfiguration.class})
-@TestPropertySource(properties = {
-    "spring.info.git.location=classpath:uk/gov/hmcts/probate/services/persistence/git-test.properties"})
-public class GitCommitInfoEndpointTest {
+public class FormDataRepositoryTest {
 
   {
     System.setProperty("h2.customDataTypesHandler", TestJsonDataTypeHandler.class.getName());
     System.setProperty("h2.javaObjectSerializer", TestJavaObjectSerializer.class.getName());
   }
 
-  private static final String EXPECTED_COMMIT_ID_INFO_RESPONSE = "0773f12";
-  private static final String EXPECTED_COMMIT_TIME_INFO_RESPONSE = "2018-05-23T13:59+1234";
-
   @Autowired
   private MockMvc mockMvc;
 
+  @Autowired
+  private FormdataRepository formdataRepository;
+
+  @Before
+  public void setUp() throws Exception {
+    mockMvc.perform(post("/formdata/")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(getJsonFromFile("formData.json")))
+        .andExpect(status().isCreated());
+  }
+
   @Test
-  public void shouldGetGitCommitInfoEndpoint() throws Exception {
-    mockMvc.perform(get("/info"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.git.commit.id").value(EXPECTED_COMMIT_ID_INFO_RESPONSE))
-        .andExpect(jsonPath("$.git.commit.time").value(EXPECTED_COMMIT_TIME_INFO_RESPONSE));
+  public void shouldGetFormData() throws Exception {
+    mockMvc.perform(get("/formdata/1"))
+        .andExpect(status().isOk());
+  }
+
+  @Test
+  public void shouldFindBySubmissionReference() throws Exception {
+    mockMvc.perform(get("/formdata/search/findBySubmissionReference?submissionReference=123"))
+        .andExpect(status().isOk());
+  }
+
+  @Test
+  public void shouldFindById() throws Exception {
+    mockMvc.perform(get("/formdata/search/findById?id=1"))
+        .andExpect(status().isOk());
   }
 }
-
-
