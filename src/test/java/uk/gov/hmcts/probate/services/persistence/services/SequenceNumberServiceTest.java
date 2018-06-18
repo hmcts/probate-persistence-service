@@ -1,5 +1,6 @@
 package uk.gov.hmcts.probate.services.persistence.services;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,35 +20,36 @@ import uk.gov.hmcts.probate.services.persistence.model.RegistryNotConfiguredExce
 @RunWith(MockitoJUnitRunner.class)
 public class SequenceNumberServiceTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+  @Rule
+  public ExpectedException expectedException = ExpectedException.none();
 
-    @InjectMocks
-    private SequenceNumberService sequenceNumberService;
+  @InjectMocks
+  private SequenceNumberService sequenceNumberService;
 
-    @Mock
-    private Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers;
+  @Mock
+  private Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers;
 
-    @Mock
-    private PostgreSQLSequenceMaxValueIncrementer mockIncrementer;
+  @Mock
+  private PostgreSQLSequenceMaxValueIncrementer mockIncrementer;
 
-    @Test
-    public void getNext() {
-        when(this.registrySequenceNumbers.get("ValidName"))
-                .thenReturn(mockIncrementer);
-        when(this.mockIncrementer.nextLongValue())
-                .thenReturn(1234L);
+  @Test
+  public void getNext() {
+    when(this.registrySequenceNumbers.get("ValidName"))
+        .thenReturn(mockIncrementer);
+    when(this.mockIncrementer.nextLongValue())
+        .thenReturn(1234L);
 
-        Long response = sequenceNumberService.getNext("ValidName");
+    Long response = sequenceNumberService.getNext("ValidName");
 
-        assertThat(response, is(equalTo(1234L)));
-    }
+    assertThat(response, is(equalTo(1234L)));
+  }
 
-    @Test
-    public void getNextInValidName() {
-        expectedException.expect(RegistryNotConfiguredException.class);
-        expectedException.expectMessage("InValidName");
+  @Test
+  public void getNextInValidName() {
+    expectedException.expect(RegistryNotConfiguredException.class);
+    expectedException.expectMessage("InValidName");
+    expectedException.expectCause(instanceOf(NullPointerException.class));
 
-        sequenceNumberService.getNext("InValidName");
-    }
+    sequenceNumberService.getNext("InValidName");
+  }
 }
