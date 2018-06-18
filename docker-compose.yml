@@ -19,6 +19,7 @@ services:
       - http_proxy=
       - https_proxy=
       - no_proxy=
+      - LIQUIBASE_ENABLED=true
     ports:
      - 8282:8282
     links:
