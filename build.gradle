@@ -179,9 +179,9 @@ dependencies {
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-httpcomponents', version: versions.logging
     compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
 
-    compile group: 'org.pitest', name: 'pitest', version: '1.3.2'
-    compile 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
-    compile 'org.codehaus.sonar-plugins:sonar-pitest-plugin:0.5'
+    testCompile group: 'org.pitest', name: 'pitest', version: '1.3.2'
+    testCompile 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
+    testCompile 'org.codehaus.sonar-plugins:sonar-pitest-plugin:0.5'
 
     testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
