@@ -58,7 +58,7 @@
    file name: postgresql-42.2.2.jar
    ]]></notes>
     <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
-    <cve>CVE-2018-1115</cve>u
+    <cve>CVE-2018-1115</cve>
   </suppress>
 
 </suppressions>
