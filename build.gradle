@@ -194,7 +194,6 @@ dependencies {
     testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-spring', version: '1.0.26'
     testFunctionalCompile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
     testFunctionalCompile sourceSets.main.runtimeClasspath
-    testFunctionalCompile sourceSets.test.runtimeClasspath
 
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
     testSmokeCompile sourceSets.main.runtimeClasspath
