@@ -39,7 +39,7 @@ locals {
   app_full_name = "${var.product}-${var.microservice}"
 
   //probate_frontend_hostname = "probate-frontend-aat.service.core-compute-aat.internal"
-  previewVaultName = "pro-persist-ser"
+  previewVaultName = "pro-persist-ser-aat"
   nonPreviewVaultName = "pro-persist-ser-${var.env}"
   vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
 
