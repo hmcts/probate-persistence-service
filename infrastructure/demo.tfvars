@@ -1,4 +1,3 @@
-env = "demo"
 deployment_env = "preprod"
 
 vault_section = "preprod"

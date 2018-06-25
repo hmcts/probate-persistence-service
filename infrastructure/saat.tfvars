@@ -1,4 +1,3 @@
-env = "saat"
 deployment_env = "test"
 
 vault_section = "test"

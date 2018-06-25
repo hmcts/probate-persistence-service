@@ -12,9 +12,7 @@ variable "location" {
   default = "UK South"
 }
 
-variable "env" {
-  type = "string"
-}
+variable "env" { }
 
 variable "ilbIp" { }
 
