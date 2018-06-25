@@ -1,4 +1,3 @@
-env = "prod"
 deployment_env = "prod"
 
 vault_section = "prod"

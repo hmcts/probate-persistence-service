@@ -1,4 +1,3 @@
-env = "aat"
 deployment_env = "preprod"
 
 vault_section = "preprod"

@@ -1,4 +1,3 @@
-env = "sprod"
 deployment_env = "test"
 
 vault_section = "test"
