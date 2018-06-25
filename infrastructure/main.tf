@@ -42,11 +42,6 @@ locals {
   previewVaultName = "pro-persist-ser"
   nonPreviewVaultName = "pro-persist-ser-${var.env}"
   vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
-
-  nonPreviewVaultUri = "${module.probate-persistence-service-vault.key_vault_uri}"
-  previewVaultUri = "https://pro-persist-ser-aat.vault.azure.net/"
-  vaultUri = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultUri : local.nonPreviewVaultUri}"
-
 }
 
 module "probate-persistence-service" {
@@ -84,6 +79,7 @@ module "probate-persistence-service" {
 
   }
 }
+
 
 module "probate-persistence-service-vault" {
   source              = "git@github.com:hmcts/moj-module-key-vault?ref=master"
