@@ -39,8 +39,8 @@ locals {
   app_full_name = "pro-${var.microservice}"
 
   //probate_frontend_hostname = "probate-frontend-aat.service.core-compute-aat.internal"
-  // previewVaultName = "pro-persist-ser"
-  // nonPreviewVaultName = "pro-persist-ser-${var.env}"
+  // previewVaultName = "pro-pers-ser"
+  // nonPreviewVaultName = "pro-pers-ser-${var.env}"
   // vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
 }
 
@@ -83,7 +83,7 @@ module "pro-persistence-service" {
 
 module "pro-persistence-service-vault" {
   source              = "git@github.com:hmcts/moj-module-key-vault?ref=master"
-  name                = "pro-persist-ser-${var.env}"
+  name                = "pro-pers-ser-${var.env}"
   product             = "${var.product}"
   env                 = "${var.env}"
   tenant_id           = "${var.tenant_id}"

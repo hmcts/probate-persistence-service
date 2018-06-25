@@ -12,7 +12,7 @@ properties([
 
 
 String product = "probate"
-String component = "pers-service"
+String component = "pers-ser"
 
 List<LinkedHashMap<String, Object>> secrets = [
 
