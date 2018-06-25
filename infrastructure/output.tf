@@ -3,7 +3,7 @@ output "vaultUri" {
 }
 
 output "vaultName" {
-  value = "${local.vaultName}"
+  value = "${module.probate-persistence-service-vault.key_vault_name}"
 }
 
 output "microserviceName" {
