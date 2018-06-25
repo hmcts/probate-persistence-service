@@ -1,9 +1,9 @@
 output "vaultUri" {
-  value = "${module.probate-persistence-service-vault.key_vault_uri}"
+  value = "${module.pro-persistence-service-vault.key_vault_uri}"
 }
 
 output "vaultName" {
-  value = "${module.probate-persistence-service-vault.key_vault_name}"
+  value = "${module.pro-persistence-service-vault.key_vault_name}"
 }
 
 output "microserviceName" {
