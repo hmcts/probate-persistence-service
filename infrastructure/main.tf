@@ -36,17 +36,12 @@ data "vault_generic_secret" "probate_postgresql_port" {
 locals {
   aseName = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
   //java_proxy_variables: "-Dhttp.proxyHost=${var.proxy_host} -Dhttp.proxyPort=${var.proxy_port} -Dhttps.proxyHost=${var.proxy_host} -Dhttps.proxyPort=${var.proxy_port}"
-  app_full_name = "${var.product}-${var.microservice}"
+  app_full_name = "pro-${var.microservice}"
 
   //probate_frontend_hostname = "probate-frontend-aat.service.core-compute-aat.internal"
-  previewVaultName = "pro-persist-ser"
-  nonPreviewVaultName = "pro-persist-ser-${var.env}"
-  vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
-
-  nonPreviewVaultUri = "${module.probate-persistence-service-vault.key_vault_uri}"
-  previewVaultUri = "https://pro-persist-ser-aat.vault.azure.net/"
-  vaultUri = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultUri : local.nonPreviewVaultUri}"
-
+  // previewVaultName = "pro-persist-ser"
+  // nonPreviewVaultName = "pro-persist-ser-${var.env}"
+  // vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
 }
 
 module "probate-persistence-service" {
@@ -85,9 +80,10 @@ module "probate-persistence-service" {
   }
 }
 
+
 module "probate-persistence-service-vault" {
   source              = "git@github.com:hmcts/moj-module-key-vault?ref=master"
-  name                = "${local.vaultName}"
+  name                = "pro-persist-ser-${var.env}"
   product             = "${var.product}"
   env                 = "${var.env}"
   tenant_id           = "${var.tenant_id}"
