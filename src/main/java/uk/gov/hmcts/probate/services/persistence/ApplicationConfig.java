@@ -29,6 +29,7 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Submission.class);
+        config.exposeIdsFor(Invitedata.class);
     }
 
     @Autowired
