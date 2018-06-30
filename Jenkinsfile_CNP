@@ -21,7 +21,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 withPipeline("java", product, component) {
   before('buildinfra:prod') {
     currentBuild.result = 'SUCCESS'
-    return
+    sh "exit 0"  
   }
   loadVaultSecrets(secrets)
   enableDbMigration()  // for liquibase update
