@@ -172,10 +172,9 @@ dependencies {
     }
 
     compile group: 'org.liquibase', name: 'liquibase-core', version: '3.6.1'
-    
+
     compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
-    compile group: 'uk.gov.hmcts.reform', name: 'java-logging-spring', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-httpcomponents', version: versions.logging
     compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
 
