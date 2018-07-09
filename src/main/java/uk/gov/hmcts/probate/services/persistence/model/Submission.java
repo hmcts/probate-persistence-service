@@ -1,6 +1,7 @@
 package uk.gov.hmcts.probate.services.persistence.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.IOException;
 import org.hibernate.annotations.*;
 import uk.gov.hmcts.probate.services.persistence.transformers.json.JsonBinaryType;
 import uk.gov.hmcts.probate.services.persistence.transformers.json.JsonStringType;
@@ -34,6 +35,18 @@ public class Submission implements Serializable {
     @Column(columnDefinition = "jsonb")
     @JsonProperty("submitdata")
     private Object submitData;
+
+    private void writeObject(java.io.ObjectOutputStream out)
+        throws IOException {
+        out.defaultWriteObject();
+        out.writeObject(submitData);
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+        throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        submitData = in.readObject();
+    }
 }
 
 
