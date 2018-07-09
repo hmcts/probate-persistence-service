@@ -32,6 +32,7 @@ public class Formdata implements Serializable {
     @JsonProperty("id")
     private String id;
 
+    @Column(updatable = false)
     @CreationTimestamp
     private Date creationTime;
 
