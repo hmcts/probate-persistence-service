@@ -2,6 +2,8 @@ package uk.gov.hmcts.probate.services.persistence.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -44,13 +46,13 @@ public class Formdata implements Serializable {
     @JsonProperty("submissionReference")
     private long submissionReference;
 
-    private void writeObject(java.io.ObjectOutputStream out)
+    private void writeObject(ObjectOutputStream out)
         throws IOException {
         out.defaultWriteObject();
         out.writeObject(formData);
     }
 
-    private void readObject(java.io.ObjectInputStream in)
+    private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         formData = in.readObject();
