@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public class Invitedata implements Serializable {
     @JsonProperty("agreed")
     private Boolean agreed;
 
+    @Column(updatable = false)
     @CreationTimestamp
     private Date creationTime;
 
