@@ -156,4 +156,12 @@
      <gav regex="true">^org\.springframework:spring-tx:.*$</gav>
      <cve>CVE-2018-1258</cve>
   </suppress>
+  
+  <suppress>
+     <notes><![CDATA[
+     file name: spring-aspects-4.3.18.RELEASE.jar
+     ]]></notes>
+     <gav regex="true">^org\.springframework:spring-aspects:.*$</gav>
+     <cve>CVE-2018-1258</cve>
+  </suppress>
 </suppressions>
