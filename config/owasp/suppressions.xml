@@ -125,4 +125,35 @@
     <cve>CVE-2018-1258</cve>
   </suppress>
   
+  <suppress>
+     <notes><![CDATA[
+     file name: spring-aspects-4.3.18.RELEASE.jar
+     ]]></notes>
+     <gav regex="true">^org\.springframework:spring-aspects:.*$</gav>
+     <cpe>cpe:/a:pivotal:spring_framework</cpe>
+  </suppress>
+
+  <suppress>
+     <notes><![CDATA[
+     file name: spring-orm-4.3.18.RELEASE.jar
+     ]]></notes>
+     <gav regex="true">^org\.springframework:spring-orm:.*$</gav>
+     <cve>CVE-2018-1258</cve>
+  </suppress>
+
+  <suppress>
+     <notes><![CDATA[
+     file name: spring-jdbc-4.3.18.RELEASE.jar
+     ]]></notes>
+     <gav regex="true">^org\.springframework:spring-jdbc:.*$</gav>
+     <cve>CVE-2018-1258</cve>
+  </suppress>
+
+  <suppress>
+     <notes><![CDATA[
+     file name: spring-tx-4.3.18.RELEASE.jar
+     ]]></notes>
+     <gav regex="true">^org\.springframework:spring-tx:.*$</gav>
+     <cve>CVE-2018-1258</cve>
+  </suppress>
 </suppressions>
