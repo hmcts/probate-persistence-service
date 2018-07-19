@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ff4j xmlns="http://www.ff4j.org/schema/ff4j"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ff4j.org/schema/ff4j http://ff4j.org/schema/ff4j-1.4.0.xsd">
+    <features>
+        <feature-group name="Group1">
+
+            <feature uid="feat1" description="desc1" enable="false" />
+
+            <feature uid="feat2" description="null" enable="false">
+                <security>
+                    <role name="USER" />
+                    <role name="ADMIN" />
+                </security>
+            </feature>
+
+        </feature-group>
+
+        <feature uid="AwesomeFeature" description="some desc" enable="false" />
+        <feature uid="testFeature" description="some desc" enable="false" />
+        <feature uid="english" enable="false"/>
+        <feature uid="french" enable="true"/>
+        <feature uid="exp" description="some exp desc" enable="true">
+            <flipstrategy class="org.ff4j.strategy.ClientFilterStrategy">
+                <param name="grantedClients" value="f1 &amp; f2 | !f1 | f2" />
+            </flipstrategy>
+        </feature>
+
+    </features>
+    <properties>
+        <property name="maxLoginAttempts" type="int" value="12" description="some exp desc"/>
+    </properties>
+</ff4j>
