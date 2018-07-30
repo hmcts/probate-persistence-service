@@ -1,10 +1,5 @@
 package uk.gov.hmcts.probate.services.persistence.repository;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static uk.gov.hmcts.probate.services.persistence.TestUtils.getJsonFromFile;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +13,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.gov.hmcts.probate.services.persistence.TestUtils.getJsonFromFile;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
     "spring.jpa.hibernate.dialect=org.hibernate.dialect.H2Dialect",
@@ -28,7 +30,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @ContextConfiguration(classes = {RepositoryTestConfiguration.class})
 public class InvitedataRepositoryTest {
 
-  {
+  static {
     System.setProperty("h2.customDataTypesHandler", TestJsonDataTypeHandler.class.getName());
     System.setProperty("h2.javaObjectSerializer", TestJavaObjectSerializer.class.getName());
   }
@@ -61,7 +63,8 @@ public class InvitedataRepositoryTest {
 
   @Test
   public void shouldFindByFormdataId() throws Exception {
-    mockMvc.perform(get("/invitedata/search/formdata?id=1"))
-        .andExpect(status().isOk());
+    mockMvc.perform(get("/invitedata/search/formdata?id=1234"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$._embedded.invitedata[0].id").value("1" ));
   }
 }
