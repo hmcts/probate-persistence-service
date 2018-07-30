@@ -26,7 +26,7 @@ public class Submission implements Serializable {
     @JsonProperty("id")
     private Long id;
 
-
+    @Column(updatable = false)
     @CreationTimestamp
     private Date creationTime;
 
