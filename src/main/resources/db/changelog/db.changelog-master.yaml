@@ -197,4 +197,12 @@ databaseChangeLog:
     - createSequence:
         sequenceName: oxford_sequence
         startValue: 10000
+- changeSet:
+    id: 19
+    author: praveen
+    changes:
+    - createSequence:
+        sequenceName: manchester_sequence
+        startValue: 30000
+
 

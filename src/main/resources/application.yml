@@ -30,6 +30,7 @@ server:
 registries:
   - oxford
   - birmingham
+  - manchester
 
 logging:
   level:
