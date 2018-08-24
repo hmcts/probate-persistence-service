@@ -10,3 +10,7 @@ log_level = "INFO"
 probate_postgresql_show_sql = "true"
 
 capacity = "2"
+
+asp_name = "probate-aat-asp-aat-asp"
+
+asp_rg = "mgmt-asp-aat"

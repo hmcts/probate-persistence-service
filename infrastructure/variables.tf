@@ -76,3 +76,11 @@ variable "appinsights_instrumentation_key" {
 variable "common_tags" {
   type = "map"
 }
+
+variable "asp_rg" {
+  
+}
+
+variable "asp_name" {
+  
+}

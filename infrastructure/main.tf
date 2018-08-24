@@ -50,17 +50,18 @@ locals {
 }
 
 module "probate-persistence-service" {
-  source = "git@github.com:hmcts/moj-module-webapp.git?ref=master"
+  source = "git@github.com:hmcts/moj-module-webapp.git?ref=cnp707b"
   product = "${local.app_full_name}"
   location = "${var.location}"
   env = "${var.env}"
   ilbIp = "${var.ilbIp}"
   is_frontend  = false
   subscription = "${var.subscription}"
-  asp_name     = "${var.product}-${var.env}-asp"
+  asp_name     = "${var.product}-${var.env}"
   capacity     = "${var.capacity}"
   appinsights_instrumentation_key = "${var.appinsights_instrumentation_key}"
   common_tags  = "${var.common_tags}"
+  asp_rg       = "${var.asp_rg}"
 
   app_settings = {
      // Logging vars
