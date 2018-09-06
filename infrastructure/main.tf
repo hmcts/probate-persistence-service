@@ -50,7 +50,7 @@ locals {
 }
 
 module "probate-persistence-service" {
-  source = "git@github.com:hmcts/moj-module-webapp.git?ref=cnp707b"
+  source = "git@github.com:hmcts/moj-module-webapp.git?ref=master"
   product = "${local.app_full_name}"
   location = "${var.location}"
   env = "${var.env}"
