@@ -1,8 +1,10 @@
 // Infrastructural variables
+variable "product" {}
 
-variable "product" {
-  default = "probate"
+variable "raw_product" {
+  default = "probate" // jenkins-library overrides product for PRs and adds e.g. pr-118-cmc
 }
+
 
 variable "microservice" {
   default = "persistence-service"
