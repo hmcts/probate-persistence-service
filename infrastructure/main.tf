@@ -24,6 +24,7 @@ locals {
   nonPreviewVaultName = "${var.raw_product}-${var.env}"
   vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
 
+  oldVaultName = "${(var.env == "preview" || var.env == "spreview") ? "pro-persist-ser-aat" : "pro-persist-ser-${var.env}"}"
 }
 
 data "azurerm_key_vault" "probate_key_vault" {
@@ -102,33 +103,81 @@ module "probate-persistence-db" {
 // Populate Vault with DB info
 ////////////////////////////////
 
+// resource "azurerm_key_vault_secret" "POSTGRES-USER" {
+//   name = "${local.app_full_name}-POSTGRES-USER"
+//   value = "${module.probate-persistence-db.user_name}"
+//   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+// }
+
+// resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
+//   name = "${local.app_full_name}-POSTGRES-PASS"
+//   value = "${module.probate-persistence-db.postgresql_password}"
+//   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+// }
+
+// resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
+//   name = "${local.app_full_name}-POSTGRES-HOST"
+//   value = "${module.probate-persistence-db.host_name}"
+//   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+// }
+
+// resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
+//   name = "${local.app_full_name}-POSTGRES-PORT"
+//   value = "${module.probate-persistence-db.postgresql_listen_port}"
+//   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+// }
+
+// resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
+//   name = "${local.app_full_name}-POSTGRES-DATABASE"
+//   value = "${module.probate-persistence-db.postgresql_database}"
+//   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+// }
+
+###################################################
+#
+#           Old Vault
+#
+##################################################
+
+module "probate-persistence-service-vault" {
+  source              = "git@github.com:hmcts/moj-module-key-vault?ref=master"
+  name                = "${local.oldVaultName}"
+  product             = "${var.product}"
+  env                 = "${var.env}"
+  tenant_id           = "${var.tenant_id}"
+  object_id           = "${var.jenkins_AAD_objectId}"
+  resource_group_name = "${module.probate-persistence-service.resource_group_name}"
+  product_group_object_id = "33ed3c5a-bd38-4083-84e3-2ba17841e31e"
+}
+
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
   name = "${local.app_full_name}-POSTGRES-USER"
   value = "${module.probate-persistence-db.user_name}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  vault_uri = "${module.probate-persistence-service-vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
   name = "${local.app_full_name}-POSTGRES-PASS"
   value = "${module.probate-persistence-db.postgresql_password}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  vault_uri = "${module.probate-persistence-service-vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
   name = "${local.app_full_name}-POSTGRES-HOST"
   value = "${module.probate-persistence-db.host_name}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  vault_uri = "${module.probate-persistence-service-vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
   name = "${local.app_full_name}-POSTGRES-PORT"
   value = "${module.probate-persistence-db.postgresql_listen_port}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  vault_uri = "${module.probate-persistence-service-vault.key_vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
   name = "${local.app_full_name}-POSTGRES-DATABASE"
   value = "${module.probate-persistence-db.postgresql_database}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  vault_uri = "${module.probate-persistence-service-vault.key_vault_uri}"
 }
+
 

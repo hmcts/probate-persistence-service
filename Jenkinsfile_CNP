@@ -19,19 +19,16 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 withPipeline("java", product, component) {
-  before('buildinfra:prod') {
-    currentBuild.result = 'SUCCESS'
-    sh "exit 0"  
-  }
+
   loadVaultSecrets(secrets)
   enableDbMigration()  // for liquibase update
-  //enableSlackNotifications('#probate-jenkins')
+  enableSlackNotifications('#probate-jenkins')
   after('test') {
-    try {
-      sh './gradlew pitest'
-    } finally {
-      steps.archiveArtifacts "build/reports/pitest/**/*.*"
-    }
+    // try {
+    //   sh './gradlew pitest'
+    // } finally {
+    //   steps.archiveArtifacts "build/reports/pitest/**/*.*"
+    // }
 
     publishHTML target: [
             alwaysLinkToLastBuild: true,
