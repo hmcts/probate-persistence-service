@@ -24,7 +24,8 @@ locals {
   nonPreviewVaultName = "${var.raw_product}-${var.env}"
   vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
 
-  oldVaultName = "${(var.env == "preview" || var.env == "spreview") ? "pro-persist-ser-aat" : "pro-persist-ser-${var.env}"}"
+  oldVaultName = "${(var.env == "preview" || var.env == "spreview") ? "pro-persist-ser-aat" : "pro-persist-ser-${var.env}" }"
+  vaultName = "${(var.env == "aat") ? local.oldVaultName : local.nonPreviewVaultName}"
 }
 
 data "azurerm_key_vault" "probate_key_vault" {
