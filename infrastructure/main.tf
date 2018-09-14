@@ -219,7 +219,7 @@ module "probate-persistence-db" {
 
 module "probate-persistence-service-vault" {
   source              = "git@github.com:hmcts/moj-module-key-vault?ref=master"
-  name                = "${local.oldVaultName}"
+  name                = "${local.vaultName}"
   product             = "${var.product}"
   env                 = "${var.env}"
   tenant_id           = "${var.tenant_id}"
