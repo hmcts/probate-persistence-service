@@ -19,7 +19,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 withPipeline("java", product, component) {
-
+  env.TF_LOG='DEBUG'
   loadVaultSecrets(secrets)
   enableDbMigration()  // for liquibase update
   enableSlackNotifications('#probate-jenkins')
