@@ -64,7 +64,6 @@ module "probate-persistence-service" {
   asp_rg       = "${var.asp_rg}"
 
   app_settings = {
-    env.TF_LOG='DEBUG'
      // Logging vars
     REFORM_TEAM = "${var.product}"
     REFORM_SERVICE_NAME = "${var.microservice}"
