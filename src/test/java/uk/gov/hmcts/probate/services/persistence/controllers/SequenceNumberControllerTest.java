@@ -28,7 +28,7 @@ public class SequenceNumberControllerTest {
     @Test
     public void getNext() throws Exception {
 
-        when(mockSequenceNumberService.getNext(anyString()))
+        when(mockSequenceNumberService.getNextSequenceNumber(anyString()))
                 .thenReturn(1234L);
 
         this.mvc.perform(get("/sequence-number/registryName"))

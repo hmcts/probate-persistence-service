@@ -39,7 +39,7 @@ public class SequenceNumberServiceTest {
     when(this.mockIncrementer.nextLongValue())
         .thenReturn(1234L);
 
-    Long response = sequenceNumberService.getNext("ValidName");
+    Long response = sequenceNumberService.getNextSequenceNumber("ValidName");
 
     assertThat(response, is(equalTo(1234L)));
   }
@@ -50,6 +50,6 @@ public class SequenceNumberServiceTest {
     expectedException.expectMessage("InValidName");
     expectedException.expectCause(instanceOf(NullPointerException.class));
 
-    sequenceNumberService.getNext("InValidName");
+    sequenceNumberService.getNextSequenceNumber("InValidName");
   }
 }
