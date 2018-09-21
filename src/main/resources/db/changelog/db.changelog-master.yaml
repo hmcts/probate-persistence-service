@@ -204,5 +204,29 @@ databaseChangeLog:
     - createSequence:
         sequenceName: manchester_sequence
         startValue: 30000
-
-
+- changeSet:
+    id: 20
+    author: praveen
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(255)
+        - column:
+            name: address
+            type: VARCHAR(255)
+        - column:
+            name: ratio
+            type: BIGINT
+        - column:
+            name: counter
+            type: BIGINT
+        tableName: registry
