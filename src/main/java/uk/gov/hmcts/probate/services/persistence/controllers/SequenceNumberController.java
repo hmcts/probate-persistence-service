@@ -1,5 +1,6 @@
 package uk.gov.hmcts.probate.services.persistence.controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,12 @@ public class SequenceNumberController {
   private SequenceNumberService sequenceNumberService;
 
 
-  @GetMapping(value = "/sequence-number/{registry}")
-  public ResponseEntity<Long> getNext(@PathVariable String registry) {
-
-    Long sequenceNumber = sequenceNumberService.getNext(registry);
-    logger.info("Request with sequence number: {}, and registry: {} processed", sequenceNumber, registry);
-    return new ResponseEntity<>(sequenceNumber, HttpStatus.OK);
+  @GetMapping(value = "/registry/{submissionReference}")
+  public ResponseEntity<JsonNode> getNext(@PathVariable Long submissionReference) {
+    JsonNode registryData = sequenceNumberService.getNextRegistry(submissionReference);
+    logger.info("Request with sequence number: {}, and registry: {} processed",
+            registryData.get("registry").get("name"),
+            registryData.get("registry").get("sequenceNumber"));
+    return new ResponseEntity<>(registryData, HttpStatus.OK);
   }
 }
