@@ -11,6 +11,6 @@ probate_postgresql_show_sql = "true"
 
 capacity = "2"
 
-asp_name = "probate-aat-asp-aat-asp"
+asp_name = "probate-aat"
 
-asp_rg = "mgmt-asp-aat"
+asp_rg = "probate-aat"
