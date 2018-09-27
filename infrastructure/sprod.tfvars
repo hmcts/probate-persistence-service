@@ -11,4 +11,4 @@ probate_postgresql_show_sql = "true"
 
 asp_name = "probate-sprod"
 
-asp_rg = "probate-shared-infrastructure-sprod"
+asp_rg = "probate-sprod"
