@@ -6,6 +6,7 @@ import net.serenitybdd.rest.SerenityRest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
@@ -14,38 +15,34 @@ public class PersistenceServiceSequenceNumberControllerTests extends Integration
     private static final String OXFORD = "oxford";
 
     @Test
-    public void getNextOxfordWithSuccess() {
-        validateGetSuccess(OXFORD);
+    public void getNextRegistryWithSuccess() {
+        validateGetSuccess(1234L);
     }
 
-    @Test
-    public void getNextBirminghamWithSuccess() {
-        validateGetSuccess(BIRMINGHAM);
-    }
 
     @Test
     public void getNextRegistryWithFailure() {
         String invalidRegistry = "dundee";
-        String errorMessage = "Registry not configured: " + invalidRegistry;
-        validateGetFailure(invalidRegistry, errorMessage, 404);
+        String errorMessage = "java.lang.NumberFormatException: For input string: \"" + invalidRegistry;
+        validateGetFailure(invalidRegistry, errorMessage);
     }
 
-    private void validateGetSuccess(String registry) {
+    private void validateGetSuccess(Long submissionReference) {
         SerenityRest.given().relaxedHTTPSValidation()
                 .headers(utils.getHeaders())
-                .when().get(persistenceServiceUrl + "/sequence-number/" + registry)
+                .when().get(persistenceServiceUrl + "/registry/" + submissionReference)
                 .then().assertThat().statusCode(200);
     }
 
-    private void validateGetFailure(String registry, String errorMessage, Integer statusCode) {
+    private void validateGetFailure(String registry, String errorMessage) {
         Response response = SerenityRest.given().relaxedHTTPSValidation()
                 .headers(utils.getHeaders())
-                .when().get(persistenceServiceUrl + "/sequence-number/" + registry)
+                .when().get(persistenceServiceUrl + "/registry/" + registry)
                 .thenReturn();
 
-        response.then().assertThat().statusCode(statusCode)
-                .and().body("error", equalTo("Not Found"))
-                .and().body("message", equalTo(errorMessage));
+        response.then().assertThat().statusCode(400)
+                .and().body("error", equalTo("Bad Request"))
+                .and().body("message", containsString(errorMessage));
 
     }
 }
