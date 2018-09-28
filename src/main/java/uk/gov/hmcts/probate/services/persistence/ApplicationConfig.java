@@ -20,7 +20,9 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer;
 
+import uk.gov.hmcts.probate.services.persistence.model.Registry;
 import uk.gov.hmcts.probate.services.persistence.model.Submission;
+import uk.gov.hmcts.probate.services.persistence.repository.RegistryRepository;
 
 @EntityScan(basePackages = {"uk.gov.hmcts.probate.services.persistence.model"})
 @EnableJpaRepositories(basePackages = {"uk.gov.hmcts.probate.services.persistence.repository"})
@@ -37,9 +39,12 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    private List<String> registries = new ArrayList<>();
-    
-    public List<String> getRegistries() {
+    @Autowired
+    private RegistryRepository registryRepository;
+
+    private List<Registry> registries = new ArrayList<>();
+
+    public List<Registry> getRegistries() {
         return registries;
     }
 
@@ -47,6 +52,27 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     public Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers() {
         return registries
                 .stream()
-                .collect(Collectors.toMap(s -> s, s -> new PostgreSQLSequenceMaxValueIncrementer(dataSource, s + "_sequence")));
+                .collect(Collectors.toMap(s -> s.getId(), s -> new PostgreSQLSequenceMaxValueIncrementer(dataSource, s.getId() + "_sequence")));
+    }
+
+    @Bean
+    public List<Registry> updateRegistries() {
+        List<String> registryData = registryRepository.findAll().stream()
+                .map(Registry::getId)
+                .collect(Collectors.toList());
+        List<String> registryNames = registries.stream()
+                .map(Registry::getId)
+                .collect(Collectors.toList());
+
+        registries.forEach(r -> {
+                if (registryData.contains(r.getId())) {
+                    registryRepository.updateRatio(r.getRatio(), r.getId());
+                } else {
+                    registryRepository.save(r);
+                }
+            });
+        registryData.removeAll(registryNames);
+        registryData.forEach(r -> registryRepository.delete(registryRepository.findById(r)));
+        return registries;
     }
 }
