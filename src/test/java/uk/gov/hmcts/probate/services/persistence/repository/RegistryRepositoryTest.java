@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import uk.gov.hmcts.probate.services.persistence.model.Registry;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
@@ -54,5 +55,12 @@ public class RegistryRepositoryTest {
     public void shouldFindById() throws Exception {
         mockMvc.perform(get("/registry/search/findById?id=oxford"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldUpdateRatio() {
+        registryRepository.updateRatio(3L, "oxford");
+        Registry registry = registryRepository.findById("oxford");
+        assertThat(registry.getRatio(), is(3L));
     }
 }
