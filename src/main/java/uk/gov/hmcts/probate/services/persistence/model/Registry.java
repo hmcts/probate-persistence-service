@@ -1,8 +1,6 @@
 package uk.gov.hmcts.probate.services.persistence.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,46 +9,70 @@ import java.io.Serializable;
 public class Registry implements Serializable {
 
     @Id
-    private String name;
+    private String id;
 
-    private String address;
-
+    @NotNull
     private String email;
 
+    @NotNull
+    private String address;
+
+    @NotNull
     private Long ratio;
 
-    private Long count;
+    @NotNull
+    private Long counter;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
+    public String getId() {
+        return id;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     public Long getRatio() {
         return ratio;
     }
 
-    public Long getCount() {
-        return count;
+    public Long getCounter() {
+        return counter;
     }
 
-    public void incrementCount() {
-        count++;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void resetCount() {
-        count = 0L;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setRatio(Long ratio) {
+        this.ratio = ratio;
+    }
+
+    public void setCounter(Long counter) {
+        this.counter = counter;
+    }
+
+    public void incrementCounter() {
+        counter += 1;
+    }
+
+    public void resetCounter() {
+        counter = 0L;
     }
 
     public String capitalizeRegistryName() {
-        return name.substring(0,1).toUpperCase()
-                + name.substring(1).toLowerCase();
+        return id.substring(0,1).toUpperCase()
+                + id.substring(1).toLowerCase();
     }
 }
