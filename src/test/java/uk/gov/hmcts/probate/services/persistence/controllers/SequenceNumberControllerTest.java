@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.probate.services.persistence.TestUtils;
-import uk.gov.hmcts.probate.services.persistence.services.SequenceNumberService;
+import uk.gov.hmcts.probate.services.persistence.services.RegistrySequenceService;
 
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -26,7 +26,7 @@ public class SequenceNumberControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private SequenceNumberService mockSequenceNumberService;
+    private RegistrySequenceService mockRegistrySequenceService;
 
     private TestUtils testUtils;
 
@@ -39,7 +39,7 @@ public class SequenceNumberControllerTest {
     public void getNext() throws Exception {
         JsonNode registryData = testUtils.getJsonNodeFromFile("registryData.json");
 
-        when(mockSequenceNumberService.getNextRegistry(anyLong()))
+        when(mockRegistrySequenceService.getNextRegistry(anyLong()))
                 .thenReturn(registryData);
         this.mvc.perform(get("/registry/" + 1234))
                 .andExpect(status().isOk()).andExpect(content().json(registryData.toString()));
