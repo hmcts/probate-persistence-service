@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.hmcts.probate.services.persistence.services.SequenceNumberService;
+import uk.gov.hmcts.probate.services.persistence.services.RegistrySequenceService;
 
 @RestController
 public class SequenceNumberController {
@@ -18,15 +18,15 @@ public class SequenceNumberController {
   private static final Logger logger = LoggerFactory.getLogger(SequenceNumberController.class);
 
   @Autowired
-  private SequenceNumberService sequenceNumberService;
+  private RegistrySequenceService registrySequenceService;
 
 
   @GetMapping(value = "/registry/{submissionReference}")
   public ResponseEntity<JsonNode> getNext(@PathVariable Long submissionReference) {
-    JsonNode registryData = sequenceNumberService.getNextRegistry(submissionReference);
+    JsonNode registryData = registrySequenceService.getNextRegistry(submissionReference);
     logger.info("Request with sequence number: {}, and registry: {} processed",
-            registryData.get("registry").get("name"),
-            registryData.get("registry").get("sequenceNumber"));
+            registryData.get("registry").get("sequenceNumber"),
+            registryData.get("registry").get("name"));
     return new ResponseEntity<>(registryData, HttpStatus.OK);
   }
 }

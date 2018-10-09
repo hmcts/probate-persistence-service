@@ -28,7 +28,7 @@ import uk.gov.hmcts.probate.services.persistence.repository.RegistryRepository;
 import javax.persistence.EntityManager;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SequenceNumberServiceTest {
+public class RegistrySequenceServiceTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -47,7 +47,7 @@ public class SequenceNumberServiceTest {
     private EntityManager entityManager;
 
     private TestUtils testUtils;
-    private SequenceNumberService sequenceNumberService;
+    private RegistrySequenceService sequenceNumberService;
     private List<Registry> registryList;
 
     private Registry oxford = new Registry();
@@ -78,7 +78,7 @@ public class SequenceNumberServiceTest {
         registryList.add(manchester);
         testUtils = new TestUtils();
         mapper = new ObjectMapper();
-        sequenceNumberService = new SequenceNumberService(registrySequenceNumbers, registryRepository, entityManager, mapper);
+        sequenceNumberService = new RegistrySequenceService(registrySequenceNumbers, registryRepository, entityManager, mapper);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class SequenceNumberServiceTest {
     }
 
     @Test
-    public void getNextInValidName() {
+    public void getNextInvalidName() {
         expectedException.expect(RegistryNotConfiguredException.class);
         expectedException.expectMessage("InValidName");
         expectedException.expectCause(instanceOf(NullPointerException.class));

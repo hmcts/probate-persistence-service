@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class SequenceNumberService {
+public class RegistrySequenceService {
 
     @Autowired
     private Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers;
@@ -37,7 +37,7 @@ public class SequenceNumberService {
     private static final String EMAIL = "email";
 
     @Autowired
-    public SequenceNumberService(Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers,
+    public RegistrySequenceService(Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers,
                                  RegistryRepository registryRepository, EntityManager entityManager,
                                  ObjectMapper mapper) {
         this.registrySequenceNumbers = registrySequenceNumbers;

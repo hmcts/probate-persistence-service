@@ -1,5 +1,7 @@
 package uk.gov.hmcts.probate.services.persistence.model;
 
+import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -72,7 +74,6 @@ public class Registry implements Serializable {
     }
 
     public String capitalizeRegistryName() {
-        return id.substring(0,1).toUpperCase()
-                + id.substring(1).toLowerCase();
+        return StringUtils.capitalize(id);
     }
 }
