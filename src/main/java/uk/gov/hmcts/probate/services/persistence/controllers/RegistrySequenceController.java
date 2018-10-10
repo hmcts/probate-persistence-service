@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.gov.hmcts.probate.services.persistence.services.RegistrySequenceService;
 
 @RestController
-public class SequenceNumberController {
+public class RegistrySequenceController {
 
 
-  private static final Logger logger = LoggerFactory.getLogger(SequenceNumberController.class);
+  private static final Logger logger = LoggerFactory.getLogger(RegistrySequenceController.class);
 
   @Autowired
   private RegistrySequenceService registrySequenceService;
