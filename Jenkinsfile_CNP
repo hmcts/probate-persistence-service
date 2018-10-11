@@ -19,9 +19,12 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 withPipeline("java", product, component) {
-  before('buildinfra:prod') {
+  /*before('buildinfra:prod') {
     currentBuild.result = 'SUCCESS'
     sh "exit 0"  
+  }*/
+  before('buildinfra:prod') {
+    error 'Deliberately breaking pipeline to prevent prod deployment'
   }
   loadVaultSecrets(secrets)
   enableDbMigration()  // for liquibase update
