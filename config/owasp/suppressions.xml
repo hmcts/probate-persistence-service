@@ -140,6 +140,13 @@
      <gav regex="true">^org\.springframework:spring-orm:.*$</gav>
      <cve>CVE-2018-1258</cve>
   </suppress>
+  <suppress>
+   <notes><![CDATA[
+   file name: postgresql-42.2.2.jar
+   ]]></notes>
+   <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
+   <cve>CVE-2016-7048</cve>
+</suppress>
 
   <suppress>
      <notes><![CDATA[
