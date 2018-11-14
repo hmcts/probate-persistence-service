@@ -49,7 +49,7 @@ spec:
               memory: '2048Mi'
               cpu: '2500m'
           ports:
-            - containerPort: 8080
+            - containerPort: 8282
               name: http
           imagePullPolicy: Always
 ---
@@ -65,7 +65,7 @@ spec:
   - name: http
     protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 8282
   selector:
     app: ${SERVICE_NAME}
 ---
