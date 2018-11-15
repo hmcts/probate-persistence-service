@@ -1,15 +1,8 @@
 ---
-security:
-  basic:
-    enabled: false
-
-management:
-  security:
-    enabled: false
-
 spring:
   application:
     name: probate-persistence-service
+
   jpa:
     database: POSTGRESQL
     show-sql: ${probate.persistence.show_sql}
@@ -20,8 +13,10 @@ spring:
     url: jdbc:postgresql://${probate.postgresql.hostname}:${probate.postgresql.port}/${probate.postgresql.database}
     username:  ${probate.postgresql.user}
     password:  ${probate.postgresql.password}
+    driverClassName: org.postgresql.Driver
 
-  database.driverClassName: org.postgresql.Driver
+  liquibase:
+    enabled: ${LIQUIBASE_AT_STARTUP:false}
 
 
 server:
@@ -41,7 +36,3 @@ logging:
 
 azure:
   app_insights_key: ${APPINSIGHTS_INSTRUMENTATIONKEY:false}
-
-liquibase:
-  enabled: ${LIQUIBASE_AT_STARTUP:false}
-
