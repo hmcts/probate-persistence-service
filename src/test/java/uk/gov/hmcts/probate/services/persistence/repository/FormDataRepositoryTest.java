@@ -36,9 +36,6 @@ public class FormDataRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private FormdataRepository formdataRepository;
-
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/formdata/")

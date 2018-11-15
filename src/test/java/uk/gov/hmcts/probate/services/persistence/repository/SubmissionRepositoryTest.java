@@ -36,9 +36,6 @@ public class SubmissionRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private SubmissionRepository submissionRepository;
-
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/submissions/")

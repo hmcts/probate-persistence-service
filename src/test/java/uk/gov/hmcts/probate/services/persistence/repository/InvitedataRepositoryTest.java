@@ -36,9 +36,6 @@ public class InvitedataRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private InvitedataRepository invitedataRepository;
-
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/invitedata/")
