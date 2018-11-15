@@ -1,28 +1,36 @@
 ---
-security:
-  basic:
-    enabled: false
-
-management:
-  security:
-    enabled: false
-
 spring:
   application:
     name: probate-persistence-service
+
   jpa:
     database: POSTGRESQL
     show-sql: ${probate.persistence.show_sql}
     hibernate.ddl-auto: none
     database-platform:  uk.gov.hmcts.probate.services.persistence.hibernate.JsonPostgresSQL94Dialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
 
   datasource:
     url: jdbc:postgresql://${probate.postgresql.hostname}:${probate.postgresql.port}/${probate.postgresql.database}
     username:  ${probate.postgresql.user}
     password:  ${probate.postgresql.password}
+    driverClassName: org.postgresql.Driver
 
-  database.driverClassName: org.postgresql.Driver
+  liquibase:
+    enabled: ${LIQUIBASE_AT_STARTUP:false}
 
+management:
+  endpoints:
+    web:
+      base-path: '/'
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
 
 server:
   port: ${probate.persistence.port}
@@ -41,7 +49,3 @@ logging:
 
 azure:
   app_insights_key: ${APPINSIGHTS_INSTRUMENTATIONKEY:false}
-
-liquibase:
-  enabled: ${LIQUIBASE_AT_STARTUP:false}
-
