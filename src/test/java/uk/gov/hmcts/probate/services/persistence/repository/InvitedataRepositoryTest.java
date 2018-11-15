@@ -54,12 +54,6 @@ public class InvitedataRepositoryTest {
   }
 
   @Test
-  public void shouldFindById() throws Exception {
-    mockMvc.perform(get("/invitedata/search/findById?id=1"))
-        .andExpect(status().isOk());
-  }
-
-  @Test
   public void shouldFindByFormdataId() throws Exception {
     mockMvc.perform(get("/invitedata/search/formdata?id=1"))
         .andExpect(status().isOk());

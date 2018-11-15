@@ -52,10 +52,4 @@ public class SubmissionRepositoryTest {
     mockMvc.perform(get("/submissions/1"))
         .andExpect(status().isOk());
   }
-
-  @Test
-  public void shouldFindById() throws Exception {
-    mockMvc.perform(get("/submissions/search/findById?id=1"))
-        .andExpect(status().isOk());
-  }
 }

@@ -58,10 +58,4 @@ public class FormDataRepositoryTest {
     mockMvc.perform(get("/formdata/search/findBySubmissionReference?submissionReference=123"))
         .andExpect(status().isOk());
   }
-
-  @Test
-  public void shouldFindById() throws Exception {
-    mockMvc.perform(get("/formdata/search/findById?id=1"))
-        .andExpect(status().isOk());
-  }
 }
