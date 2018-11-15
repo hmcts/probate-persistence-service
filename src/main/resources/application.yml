@@ -8,6 +8,10 @@ spring:
     show-sql: ${probate.persistence.show_sql}
     hibernate.ddl-auto: none
     database-platform:  uk.gov.hmcts.probate.services.persistence.hibernate.JsonPostgresSQL94Dialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
 
   datasource:
     url: jdbc:postgresql://${probate.postgresql.hostname}:${probate.postgresql.port}/${probate.postgresql.database}
