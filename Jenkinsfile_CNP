@@ -24,7 +24,11 @@ withPipeline("java", product, component) {
     sh "exit 0"  
   }*/
 
+  setVaultName('probate')
   loadVaultSecrets(secrets)
+  enableSlackNotifications('#probate-jenkins')
+  enableDockerBuild()
+  enableDeployToAKS()
   enableDbMigration()  // for liquibase update
   //enableSlackNotifications('#probate-jenkins')
   after('test') {
