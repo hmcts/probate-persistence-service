@@ -146,7 +146,7 @@
    ]]></notes>
    <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
    <cve>CVE-2016-7048</cve>
-</suppress>
+  </suppress>
 
   <suppress>
      <notes><![CDATA[
@@ -170,5 +170,29 @@
      ]]></notes>
      <gav regex="true">^org\.springframework:spring-aspects:.*$</gav>
      <cve>CVE-2018-1258</cve>
+  </suppress>
+
+  <suppress>
+   <notes><![CDATA[
+   file name: postgresql-42.2.2.jar
+   ]]></notes>
+   <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
+   <cve>CVE-2016-7048</cve>
+  </suppress>
+
+  <suppress>
+   <notes><![CDATA[
+   file name: dom4j-1.6.1.jar
+   ]]></notes>
+   <gav regex="true">^dom4j:dom4j:.*$</gav>
+   <cve>CVE-2018-1000632</cve>
+  </suppress>
+ 
+  <suppress>
+   <notes><![CDATA[
+   file name: applicationinsights-core-2.0.2.jar/META-INF/maven/com.google.guava/guava/pom.xml
+   ]]></notes>
+   <gav regex="true">^com\.google\.guava:guava:.*$</gav>
+   <cpe>cpe:/a:google:guava</cpe>
   </suppress>
 </suppressions>

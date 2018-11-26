@@ -31,7 +31,7 @@ if ${wait_for_database}; then
   database_address=${database_address#*//} # remove protocol
   database_address=${database_address%/*} # remove path
 
-  /usr/local/bin/wait-for-it.sh ${database_address} -s -t ${wait_for_database_timeout} -- java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /persistence-service.jar $@
+  local/bin/wait-for-it.sh ${database_address} -s -t ${wait_for_database_timeout} -- java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /opt/app/persistence-service.jar $@
 else
-  java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /persistence-service.jar $@
+  java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /opt/app/persistence-service.jar $@
 fi

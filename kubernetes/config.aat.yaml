@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${SERVICE_NAME}-config
+  namespace: ${NAMESPACE}
+data:
+  SPRING_APPLICATION_JSON : '{"registries":["oxford","birmingham","manchester"]}'
+

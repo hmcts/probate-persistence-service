@@ -24,14 +24,18 @@ withPipeline("java", product, component) {
     sh "exit 0"  
   }*/
 
+  setVaultName('probate')
   loadVaultSecrets(secrets)
+  enableSlackNotifications('#probate-jenkins')
+  enableDockerBuild()
+  enableDeployToAKS()
   enableDbMigration()  // for liquibase update
   //enableSlackNotifications('#probate-jenkins')
   after('test') {
     try {
-      sh './gradlew pitest'
+//      sh './gradlew pitest'
     } finally {
-      steps.archiveArtifacts "build/reports/pitest/**/*.*"
+//      steps.archiveArtifacts "build/reports/pitest/**/*.*"
     }
 
     publishHTML target: [
