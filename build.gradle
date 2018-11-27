@@ -3,7 +3,7 @@ import java.util.stream.Collectors
 buildscript {
     dependencies {
         classpath group: 'org.sonarsource.scanner.gradle', name: 'sonarqube-gradle-plugin', version: '2.5'
-        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.18")
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.15")
     }
 }
 
@@ -159,7 +159,7 @@ processResources {
 
 def versions = [
     logging: '2.2.1',
-    serenity: '2.0.18'
+    serenity: '2.0.15'
 ]
 
 dependencies {
