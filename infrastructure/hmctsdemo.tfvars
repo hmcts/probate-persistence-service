@@ -1,4 +1,4 @@
-env = "demo"
+env = "hmctsdemo"
 deployment_env = "preprod"
 
 vault_section = "preprod"
