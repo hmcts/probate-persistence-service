@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'application'
     id 'pmd'
-    id 'org.springframework.boot' version '1.5.14.RELEASE'
+    id 'org.springframework.boot' version '2.0.7.RELEASE'
     id 'org.owasp.dependencycheck' version '3.2.1'
     id 'com.github.ben-manes.versions' version '0.15.0'
     id 'com.gorylenko.gradle-git-properties' version '1.4.21'
@@ -158,14 +158,15 @@ processResources {
 }
 
 def versions = [
-        logging: '2.2.1'
+        logging: '2.2.1',
+        springBootVersion: '2.0.7.RELEASE',
+        serenityVersion: '2.0.27',
 ]
 
 dependencies {
-
-    compile ('org.springframework.boot:spring-boot-starter-actuator')
-    compile ('org.springframework.boot:spring-boot-starter-data-rest')
-    compile ('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: versions.springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: versions.springBootVersion
     
     compile ('org.postgresql:postgresql:42.2.2') {
         exclude module: 'slf4j-simple'
@@ -173,7 +174,7 @@ dependencies {
 
     compile group: 'org.liquibase', name: 'liquibase-core', version: '3.6.1'
 
-    compile group: 'uk.gov.hmcts.reform', name:'java-logging', version: versions.logging
+    compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.logging
     compile group: 'uk.gov.hmcts.reform', name: 'java-logging-httpcomponents', version: versions.logging
     compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
@@ -184,17 +185,20 @@ dependencies {
 
     testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
-    testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: versions.springBootVersion
 
-    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-junit', version: '1.5.2'
-    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-core', version: '1.5.2'
-    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-rest-assured', version: '1.5.2'
-    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-spring', version: '1.0.26'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
+
+    testFunctionalCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: versions.springBootVersion
+    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-junit', version: versions.serenityVersion
+    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-core', version: versions.serenityVersion
+    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-rest-assured', version: versions.serenityVersion
+    testFunctionalCompile group: 'net.serenity-bdd', name: 'serenity-spring', version: versions.serenityVersion
     testFunctionalCompile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
+    testFunctionalCompile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
     testFunctionalCompile sourceSets.main.runtimeClasspath
 
-    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
     testSmokeCompile sourceSets.main.runtimeClasspath
     testSmokeCompile sourceSets.test.runtimeClasspath
 }
@@ -203,7 +207,7 @@ compileJava {
     options.compilerArgs << '-parameters'
 }
 
-jar {
+bootJar {
     archiveName = 'persistence-service.jar'
     manifest {
 
