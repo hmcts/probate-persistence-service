@@ -13,8 +13,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncrementer;
 import uk.gov.hmcts.probate.services.persistence.model.RegistryNotConfiguredException;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,10 +27,10 @@ public class SequenceNumberServiceTest {
   private SequenceNumberService sequenceNumberService;
 
   @Mock
-  private Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers;
+  private Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers;
 
   @Mock
-  private PostgreSQLSequenceMaxValueIncrementer mockIncrementer;
+  private PostgresSequenceMaxValueIncrementer mockIncrementer;
 
   @Test
   public void getNext() {
