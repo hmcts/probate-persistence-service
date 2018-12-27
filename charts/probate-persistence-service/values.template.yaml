@@ -7,7 +7,7 @@ java:
 postgresql:
   postgresqlUsername: probate
   postgresqlPassword: probate
-  postgresqlDatabase: shared-profile
+  postgresqlDatabase: user-profile
   nameOverride: shared-database
   initdbScripts:
     init.sql: |-
