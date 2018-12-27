@@ -4,25 +4,14 @@ java:
     REFORM_TEAM: probate
     REFORM_SERVICE_NAME: persistence-service
 
-#postgresql:
-#  postgresqlUsername: probate
-#  postgresqlPassword: probate
-#  postgresqlDatabase: shared-profile
-#  nameOverride: shared-database
-#  initdbScripts:
-#    init.sql: |-
-#      CREATE DATABASE "probate" WITH OWNER = probate ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
-#  persistence:
-#    enabled: false
 postgresql:
-  postgresqlUsername: hmcts
-  postgresqlPassword: hmcts
-  postgresqlDatabase: user-profile
-  nameOverride: ccd-postgres
+  postgresqlUsername: probate
+  postgresqlPassword: probate
+  postgresqlDatabase: shared-profile
+  nameOverride: shared-database
   initdbScripts:
     init.sql: |-
-      CREATE DATABASE "data-store" WITH OWNER = hmcts ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
-      CREATE DATABASE "definition-store" WITH OWNER = hmcts ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
+      CREATE DATABASE "probate" WITH OWNER = probate ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
   persistence:
     enabled: false
 
