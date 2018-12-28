@@ -9,3 +9,6 @@ postgresql:
       CREATE DATABASE "definition-store" WITH OWNER = hmcts ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
   persistence:
     enabled: false
+java:
+  configmap:
+  SPRING_APPLICATION_JSON : '{"registries":["oxford","birmingham","manchester"]}'
