@@ -36,9 +36,6 @@ public class SubmissionRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private SubmissionRepository submissionRepository;
-
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/submissions/")
@@ -48,14 +45,8 @@ public class SubmissionRepositoryTest {
   }
 
   @Test
-  public void shouldGetInviteData() throws Exception {
+  public void shouldGetSubmissionData() throws Exception {
     mockMvc.perform(get("/submissions/1"))
-        .andExpect(status().isOk());
-  }
-
-  @Test
-  public void shouldFindById() throws Exception {
-    mockMvc.perform(get("/submissions/search/findById?id=1"))
         .andExpect(status().isOk());
   }
 }
