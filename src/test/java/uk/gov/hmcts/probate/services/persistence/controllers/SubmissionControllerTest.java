@@ -34,7 +34,7 @@ public class SubmissionControllerTest {
         Submission submission = mapper.readValue(getJsonFromFile("submitData.json"), Submission.class);
         when(submissionRepository.findById(anyLong())).thenReturn(Optional.of(submission));
 
-        mockMvc.perform(get("/submission/search/findById?id=1"))
+        mockMvc.perform(get("/submissions/search/findById?id=1"))
                 .andExpect(status().isFound());
     }
 }

@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RepositoryRestController
 @ExposesResourceFor(Submission.class)
-@RequestMapping(value = "/submission")
+@RequestMapping(value = "/submissions")
 public class SubmissionController {
     @Autowired
     SubmissionRepository submissionRepository;
