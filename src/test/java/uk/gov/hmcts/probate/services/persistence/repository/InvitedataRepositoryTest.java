@@ -36,9 +36,6 @@ public class InvitedataRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private InvitedataRepository invitedataRepository;
-
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/invitedata/")
@@ -50,12 +47,6 @@ public class InvitedataRepositoryTest {
   @Test
   public void shouldGetInviteData() throws Exception {
     mockMvc.perform(get("/invitedata/1"))
-        .andExpect(status().isOk());
-  }
-
-  @Test
-  public void shouldFindById() throws Exception {
-    mockMvc.perform(get("/invitedata/search/findById?id=1"))
         .andExpect(status().isOk());
   }
 
