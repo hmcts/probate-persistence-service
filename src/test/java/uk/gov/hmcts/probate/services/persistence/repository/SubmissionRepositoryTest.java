@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,9 +36,6 @@ public class SubmissionRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private SubmissionRepository submissionRepository;
-
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/submissions/")
@@ -48,14 +45,8 @@ public class SubmissionRepositoryTest {
   }
 
   @Test
-  public void shouldGetInviteData() throws Exception {
+  public void shouldGetSubmissionData() throws Exception {
     mockMvc.perform(get("/submissions/1"))
-        .andExpect(status().isOk());
-  }
-
-  @Test
-  public void shouldFindById() throws Exception {
-    mockMvc.perform(get("/submissions/search/findById?id=1"))
         .andExpect(status().isOk());
   }
 }

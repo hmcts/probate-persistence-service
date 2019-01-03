@@ -13,13 +13,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
-import org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer;
-
+import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncrementer;
 import uk.gov.hmcts.probate.services.persistence.model.Submission;
 
 @EntityScan(basePackages = {"uk.gov.hmcts.probate.services.persistence.model"})
@@ -44,9 +41,9 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     }
 
     @Bean
-    public Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers() {
+    public Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers() {
         return registries
                 .stream()
-                .collect(Collectors.toMap(s -> s, s -> new PostgreSQLSequenceMaxValueIncrementer(dataSource, s + "_sequence")));
+                .collect(Collectors.toMap(s -> s, s -> new PostgresSequenceMaxValueIncrementer(dataSource, s + "_sequence")));
     }
 }
