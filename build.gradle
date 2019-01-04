@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'application'
     id 'pmd'
-    id 'org.springframework.boot' version '2.0.7.RELEASE'
+    id 'org.springframework.boot' version '2.0.6.RELEASE'
     id 'org.owasp.dependencycheck' version '4.0.2'
     id 'com.github.ben-manes.versions' version '0.20.0'
     id 'com.gorylenko.gradle-git-properties' version '1.5.2'
@@ -164,11 +164,12 @@ def versions = [
 ]
 
 dependencies {
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: versions.springBootVersion
 
-    compile ('org.postgresql:postgresql:42.2.5') {
+    compile ('org.postgresql:postgresql:42.2.2') {
         exclude module: 'slf4j-simple'
     }
 
