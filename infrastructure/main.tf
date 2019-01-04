@@ -8,6 +8,9 @@ provider "vault" {
   address = "https://vault.reform.hmcts.net:6200"
 }
 
+provider "azurerm" {
+  version = "1.19.0"
+}
 
 locals {
   aseName = "${data.terraform_remote_state.core_apps_compute.ase_name[0]}"
@@ -80,6 +83,7 @@ module "probate-persistence-service" {
     LIQUIBASE_AT_STARTUP = "${var.liquibase_at_startup}"
     java_app_name = "${var.microservice}"
     LOG_LEVEL = "${var.log_level}"
+    TESTING = "Test"
     //ROOT_APPENDER = "JSON_CONSOLE" //Remove json logging
 
   }
