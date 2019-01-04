@@ -1,6 +1,6 @@
 package uk.gov.hmcts.probate.functional.test;
 
-import net.serenitybdd.junit.spring.integration.SpringIntegrationMethodRule;
+import net.thucydides.junit.spring.SpringIntegration;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ public abstract class IntegrationTestBase {
     }
 
     @Rule
-    public SpringIntegrationMethodRule springIntegration;
+    public SpringIntegration springIntegration;
 
     IntegrationTestBase() {
-        this.springIntegration = new SpringIntegrationMethodRule();
+        this.springIntegration = new SpringIntegration();
     }
 }

@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +36,9 @@ public class FormDataRepositoryTest {
   @Autowired
   private MockMvc mockMvc;
 
+  @Autowired
+  private FormdataRepository formdataRepository;
+
   @Before
   public void setUp() throws Exception {
     mockMvc.perform(post("/formdata/")
@@ -53,6 +56,12 @@ public class FormDataRepositoryTest {
   @Test
   public void shouldFindBySubmissionReference() throws Exception {
     mockMvc.perform(get("/formdata/search/findBySubmissionReference?submissionReference=123"))
+        .andExpect(status().isOk());
+  }
+
+  @Test
+  public void shouldFindById() throws Exception {
+    mockMvc.perform(get("/formdata/search/findById?id=1"))
         .andExpect(status().isOk());
   }
 }
