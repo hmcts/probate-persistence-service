@@ -5,8 +5,8 @@ java:
     REFORM_SERVICE_NAME: persistence-service
 
 LIQUIBASE_AT_STARTUP: true
-SPRING_DATASOURCE_URL: 'jdbc:postgresql://10.97.17.114:5432/probate'
-PROBATE_POSTGRESQL_HOSTNAME: 10.97.17.114
+SPRING_DATASOURCE_URL: 'jdbc:postgresql://shared-database:5432/probate'
+PROBATE_POSTGRESQL_HOSTNAME: shared-database
 PROBATE_POSTGRESQL_PORT: 5432
 PROBATE_POSTGRESQL_DATABASE: probate
 PROBATE_POSTGRESQL_USER: probate
@@ -28,7 +28,3 @@ postgresql:
   # Don't modify below here.
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
-
-global:
-  subscriptionId: ${SUBSCRIPTION_ID}
-  tenantId: ${TENANT_ID}
