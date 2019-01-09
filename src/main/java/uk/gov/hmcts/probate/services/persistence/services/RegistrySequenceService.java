@@ -9,7 +9,7 @@ import javax.persistence.LockModeType;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer;
+import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncrementer;
 import org.springframework.stereotype.Service;
 import uk.gov.hmcts.probate.services.persistence.model.Registry;
 import uk.gov.hmcts.probate.services.persistence.model.RegistryNotConfiguredException;
@@ -23,7 +23,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class RegistrySequenceService {
 
-    private Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers;
+    @Autowired
+    private Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers;
     private RegistryRepository registryRepository;
     private EntityManager entityManager;
     private final ObjectMapper mapper;
@@ -36,7 +37,7 @@ public class RegistrySequenceService {
     private static final String EMAIL = "email";
 
     @Autowired
-    public RegistrySequenceService(Map<String, PostgreSQLSequenceMaxValueIncrementer> registrySequenceNumbers,
+    public RegistrySequenceService(Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers,
                                  RegistryRepository registryRepository, EntityManager entityManager,
                                  ObjectMapper mapper) {
         this.registrySequenceNumbers = registrySequenceNumbers;
