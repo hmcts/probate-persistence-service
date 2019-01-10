@@ -11,7 +11,7 @@ java:
     PROBATE_POSTGRESQL_USER: probate
     PROBATE_POSTGRESQL_PASSWORD: probate
     PROBATE_PERSISTENCE_PORT: 8282
-## Don't modify below here.
+### Don't modify below here.
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
 
