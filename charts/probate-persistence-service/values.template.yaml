@@ -3,16 +3,17 @@ java:
   environment:
     REFORM_TEAM: probate
     REFORM_SERVICE_NAME: persistence-service
-
-LIQUIBASE_AT_STARTUP: true
-SPRING_DATASOURCE_URL: jdbc:postgresql://${SERVICE_NAME}-postgres:5432/probate
-PROBATE_POSTGRESQL_HOSTNAME: ${SERVICE_NAME}-postgres
-PROBATE_POSTGRESQL_PORT: 5432
-PROBATE_POSTGRESQL_DATABASE: probate
-PROBATE_POSTGRESQL_USER: probate
-PROBATE_POSTGRESQL_PASSWORD: probate
-PROBATE_PERSISTENCE_PORT: 8282
-
+    LIQUIBASE_AT_STARTUP: true
+    SPRING_DATASOURCE_URL: jdbc:postgresql://${SERVICE_NAME}-postgres:5432/probate
+    PROBATE_POSTGRESQL_HOSTNAME: ${SERVICE_NAME}-postgres
+    PROBATE_POSTGRESQL_PORT: 5432
+    PROBATE_POSTGRESQL_DATABASE: probate
+    PROBATE_POSTGRESQL_USER: probate
+    PROBATE_POSTGRESQL_PASSWORD: probate
+    PROBATE_PERSISTENCE_PORT: 8282
+  # Don't modify below here.
+  image: ${IMAGE_NAME}
+  ingressHost: ${SERVICE_FQDN}
 
 postgresql:
   ## Global Docker image registry
@@ -315,6 +316,4 @@ postgresql:
 #  persistence:
 #    enabled: false
 
-  # Don't modify below here.
-#  image: ${IMAGE_NAME}
-  ingressHost: ${SERVICE_FQDN}
+
