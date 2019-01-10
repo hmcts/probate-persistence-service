@@ -90,8 +90,14 @@ postgresql:
 
   ## PostgreSQL admin user
   ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
-  postgresqlUsername: postgres
-
+######  postgresqlUsername: postgres
+  postgresqlUsername: probate
+  postgresqlPassword: probate
+  postgresqlDatabase: probate
+#####  nameOverride: ccd-postgres
+  initdbScripts:
+    init.sql: |-
+      CREATE DATABASE "probate" WITH OWNER = probate ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
   ## PostgreSQL password
   ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
   ##
