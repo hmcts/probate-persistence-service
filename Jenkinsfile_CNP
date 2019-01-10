@@ -6,8 +6,7 @@ String product = "probate"
 String component = "persistence-service"
 
 List<LinkedHashMap<String, Object>> secrets = [
-        secret('probateIdamUserName', 'IDAM_USERNAME'),
-        secret('probateIdamPassword', 'IDAM_PASSWORD')
+
 ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
