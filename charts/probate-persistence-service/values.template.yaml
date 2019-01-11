@@ -15,6 +15,7 @@ java:
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
 
+
 postgresql:
   ## Global Docker image registry
   ### Please, note that this will override the image registry for all the images, including dependencies, configured to use the global value
@@ -92,12 +93,10 @@ postgresql:
   ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
 ######  postgresqlUsername: postgres
   postgresqlUsername: postgres
-###  postgresqlUsername: probate
-###  postgresqlPassword: probate
-###  postgresqlDatabase: probate
-#####  nameOverride: ccd-postgres
+
   initdbScripts:
     init.sql: |-
+      CREATE USER probate WITH PASSWORD 'probate';
       CREATE DATABASE "probate" WITH OWNER = probate ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
   ## PostgreSQL password
   ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
