@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -18,11 +19,13 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncrementer;
 
+import uk.gov.hmcts.probate.services.persistence.component.RegistryUpdate;
 import uk.gov.hmcts.probate.services.persistence.model.Registry;
 import uk.gov.hmcts.probate.services.persistence.model.Submission;
 import uk.gov.hmcts.probate.services.persistence.repository.RegistryRepository;
 
 @EntityScan(basePackages = {"uk.gov.hmcts.probate.services.persistence.model"})
+@ComponentScan(basePackages = {"uk.gov.hmcts.probate.services.persistence.component"})
 @EnableJpaRepositories(basePackages = {"uk.gov.hmcts.probate.services.persistence.repository"})
 @Configuration
 @ConfigurationProperties
@@ -40,6 +43,9 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     @Autowired
     private RegistryRepository registryRepository;
 
+    @Autowired
+    private RegistryUpdate registryUpdate;
+
     private List<Registry> registries = new ArrayList<>();
 
     public List<Registry> getRegistries() {
@@ -55,22 +61,6 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
 
     @Bean
     public List<Registry> updateRegistries() {
-        List<String> registryData = registryRepository.findAll().stream()
-                .map(Registry::getId)
-                .collect(Collectors.toList());
-        List<String> registryNames = registries.stream()
-                .map(Registry::getId)
-                .collect(Collectors.toList());
-
-        registries.forEach(r -> {
-                if (registryData.contains(r.getId())) {
-                    registryRepository.updateRatio(r.getRatio(), r.getId());
-                } else {
-                    registryRepository.save(r);
-                }
-            });
-        registryData.removeAll(registryNames);
-        registryData.forEach(r -> registryRepository.delete(registryRepository.findById(r)));
-        return registries;
+       return registryUpdate.updateRegistries(registries);
     }
 }
