@@ -22,7 +22,6 @@ import org.springframework.jdbc.support.incrementer.PostgresSequenceMaxValueIncr
 import uk.gov.hmcts.probate.services.persistence.component.RegistryUpdate;
 import uk.gov.hmcts.probate.services.persistence.model.Registry;
 import uk.gov.hmcts.probate.services.persistence.model.Submission;
-import uk.gov.hmcts.probate.services.persistence.repository.RegistryRepository;
 
 @EntityScan(basePackages = {"uk.gov.hmcts.probate.services.persistence.model"})
 @ComponentScan(basePackages = {"uk.gov.hmcts.probate.services.persistence.component"})
@@ -40,12 +39,6 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private RegistryRepository registryRepository;
-
-    @Autowired
-    private RegistryUpdate registryUpdate;
-
     private List<Registry> registries = new ArrayList<>();
 
     public List<Registry> getRegistries() {
@@ -60,7 +53,7 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     }
 
     @Bean
-    public List<Registry> updateRegistries() {
+    public List<Registry> updateRegistries(RegistryUpdate registryUpdate) {
        return registryUpdate.updateRegistries(registries);
     }
 }
