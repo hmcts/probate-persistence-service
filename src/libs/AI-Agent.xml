@@ -11,8 +11,20 @@
         <Class name="uk.gov.hmcts.probate.services.ProbatePersistenceInfoContributor">
             <Method name="contribute" reportExecutionTime="true"/>
         </Class>
-        <Class name="uk.gov.hmcts.probate.services.SequenceNumberService">
-            <Method name="getNext" reportCaughtExceptions="true" reportExecutionTime="true"/>
+        <Class name="uk.gov.hmcts.probate.services.RegistrySequenceService">
+            <Method name="getNextRegistry" reportExecutionTime="true"/>
+        </Class>
+        <Class name="uk.gov.hmcts.probate.services.RegistrySequenceService">
+            <Method name="getNextSequenceNumber" reportExecutionTime="true"/>
+        </Class>
+        <Class name="uk.gov.hmcts.probate.services.RegistrySequenceService">
+            <Method name="populateRegistrySubmitData" reportExecutionTime="true"/>
+        </Class>
+        <Class name="uk.gov.hmcts.probate.services.RegistrySequenceService">
+            <Method name="identifyNextRegistry" reportExecutionTime="true"/>
+        </Class>
+        <Class name="uk.gov.hmcts.probate.services.RegistrySequenceService">
+            <Method name="resetRegistryCounters" reportExecutionTime="true"/>
         </Class>
     </Instrumentation>
 </ApplicationInsightsAgent>
