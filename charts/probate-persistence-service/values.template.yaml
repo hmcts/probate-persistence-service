@@ -325,14 +325,14 @@ java:
 #    enabled: false
 
 postgresql:
-  postgresqlUsername: hmcts
-  postgresqlPassword: hmcts
+  postgresqlUsername: probate
+  postgresqlPassword: probate
   postgresqlDatabase: user-profile
-  nameOverride: ccd-postgres
+  nameOverride: postgres
   initdbScripts:
     init.sql: |-
-      CREATE DATABASE "data-store" WITH OWNER = hmcts ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
-      CREATE DATABASE "definition-store" WITH OWNER = hmcts ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
+      CREATE DATABASE "probate" WITH OWNER = probate ENCODING = 'UTF-8' CONNECTION LIMIT = -1;
+
   persistence:
     enabled: false
 
