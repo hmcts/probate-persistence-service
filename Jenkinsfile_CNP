@@ -29,7 +29,7 @@ withPipeline("java", product, component) {
   enableSlackNotifications('#probate-jenkins')
   enableDockerBuild()
   installCharts ()
-//DOnt break the AAT Database...   enableDbMigration()  // for liquibase update
+  enableDbMigration()  // for liquibase update
   //enableSlackNotifications('#probate-jenkins')
   after('test') {
     try {
