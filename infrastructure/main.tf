@@ -107,35 +107,30 @@ module "probate-persistence-db" {
 ////////////////////////////////
 
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
-  depends_on = ["module.probate-persistence-service-vault"]
   name = "${local.app_full_name}-POSTGRES-USER"
   value = "${module.probate-persistence-db.user_name}"
   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
-  depends_on = ["module.probate-persistence-service-vault"]
   name = "${local.app_full_name}-POSTGRES-PASS"
   value = "${module.probate-persistence-db.postgresql_password}"
   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
-  depends_on = ["module.probate-persistence-service-vault"]
   name = "${local.app_full_name}-POSTGRES-HOST"
   value = "${module.probate-persistence-db.host_name}"
   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
-  depends_on = ["module.probate-persistence-service-vault"]
   name = "${local.app_full_name}-POSTGRES-PORT"
   value = "${module.probate-persistence-db.postgresql_listen_port}"
   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
-  depends_on = ["module.probate-persistence-service-vault"]
   name = "${local.app_full_name}-POSTGRES-DATABASE"
   value = "${module.probate-persistence-db.postgresql_database}"
   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
