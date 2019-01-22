@@ -4,5 +4,4 @@ metadata:
   name: ${SERVICE_NAME}-config
   namespace: ${NAMESPACE}
 data:
-  SPRING_APPLICATION_JSON : '{"registries":["oxford","birmingham","manchester"]}'
-
+  SPRING_APPLICATION_JSON : '{"registries":[{"id" : "oxford", "email":"test.probate.inbox@gmail.com", "address":"Digital Application\nOxford District Probate Registry\nCombined Court Building\nSt Aldates\nOxford\nOX1 1LY", "counter":0}, {"id": "birmingham", "email":"test2.probate.inbox@gmail.com", "address":"Digital Application\nBirmingham Probate Registry\nThe Priory Courts\n33 Bull Street\nBirmingham\nWest Midlands\nB4 6DU\n", "counter":0}, {"id": "manchester", "email":"test3.probate.inbox@gmail.com","address":"Digital Applications\nManchester District Probate Registry\nCivil Justice Centre\nGround Floor\n1 Bridge Street West\nP.O. BOX 4240\nManchester\nM60 1WJ", "counter":0}]}'
