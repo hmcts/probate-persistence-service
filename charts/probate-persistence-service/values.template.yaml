@@ -4,9 +4,9 @@ java:
     REFORM_TEAM: probate
     REFORM_SERVICE_NAME: persistence-service
     LIQUIBASE_AT_STARTUP: true
-    SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/probate
+    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-${SERVICE_NAME}:5432/probate
 ##    PROBATE_POSTGRESQL_HOSTNAME: ${SERVICE_NAME}-postgresq-0
-    PROBATE_POSTGRESQL_HOSTNAME: localhost
+    PROBATE_POSTGRESQL_HOSTNAME: postgres-${SERVICE_NAME}
     PROBATE_POSTGRESQL_PORT: 5432
     PROBATE_POSTGRESQL_DATABASE: probate
     PROBATE_POSTGRESQL_USER: probate
