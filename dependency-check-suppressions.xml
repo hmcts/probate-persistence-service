@@ -23,22 +23,22 @@
     </suppress>
     <suppress>
         <notes><![CDATA[
-   file name: jackson-databind-2.9.7.jar
-   ]]></notes>
+        file name: jackson-databind-2.9.7.jar
+        ]]></notes>
         <gav regex="true">^com\.fasterxml\.jackson\.core:jackson-databind:.*$</gav>
         <cve>CVE-2018-19361</cve>
     </suppress>
     <suppress>
         <notes><![CDATA[
-   file name: jackson-databind-2.9.7.jar
-   ]]></notes>
+        file name: jackson-databind-2.9.7.jar
+        ]]></notes>
         <gav regex="true">^com\.fasterxml\.jackson\.core:jackson-databind:.*$</gav>
         <cve>CVE-2018-19360</cve>
     </suppress>
     <suppress>
         <notes><![CDATA[
-   file name: jackson-databind-2.9.7.jar
-   ]]></notes>
+        file name: jackson-databind-2.9.7.jar
+        ]]></notes>
         <gav regex="true">^com\.fasterxml\.jackson\.core:jackson-databind:.*$</gav>
         <cve>CVE-2018-1000873</cve>
     </suppress>
