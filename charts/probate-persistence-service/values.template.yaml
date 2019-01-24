@@ -16,9 +16,6 @@ java:
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
 
-
-<<<<<<< HEAD
-=======
 #postgresql:
 #  ### Global Docker image registry
 #  ### Please, note that this will override the image registry for all the images, including dependencies, configured to use the global value
@@ -336,5 +333,3 @@ postgresql:
 
   persistence:
     enabled: false
-
->>>>>>> re-instate postgres and use CCDs config
