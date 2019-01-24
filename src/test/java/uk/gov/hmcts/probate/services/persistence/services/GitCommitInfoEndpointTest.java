@@ -1,9 +1,5 @@
 package uk.gov.hmcts.probate.services.persistence.services;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +12,11 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import uk.gov.hmcts.probate.services.persistence.repository.RepositoryTestConfiguration;
-import uk.gov.hmcts.probate.services.persistence.repository.TestJavaObjectSerializer;
-import uk.gov.hmcts.probate.services.persistence.repository.TestJsonDataTypeHandler;
+import uk.gov.hmcts.probate.services.persistence.repository.TestApplicationContextInitializer;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
@@ -26,16 +25,10 @@ import uk.gov.hmcts.probate.services.persistence.repository.TestJsonDataTypeHand
     "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"})
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = {RepositoryTestConfiguration.class})
+@ContextConfiguration(initializers = TestApplicationContextInitializer.class, classes = RepositoryTestConfiguration.class)
 @TestPropertySource(properties = {
     "spring.info.git.location=classpath:uk/gov/hmcts/probate/services/persistence/git-test.properties"})
 public class GitCommitInfoEndpointTest {
-
-  {
-    System.setProperty("h2.customDataTypesHandler", TestJsonDataTypeHandler.class.getName());
-    System.setProperty("h2.javaObjectSerializer", TestJavaObjectSerializer.class.getName());
-  }
-
   private static final String EXPECTED_COMMIT_ID_INFO_RESPONSE = "0773f12";
   private static final String EXPECTED_COMMIT_TIME_INFO_RESPONSE = "2018-05-23T13:59+1234";
 

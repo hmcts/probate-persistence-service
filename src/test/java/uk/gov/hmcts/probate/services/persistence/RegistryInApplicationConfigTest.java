@@ -15,6 +15,7 @@ import uk.gov.hmcts.probate.services.persistence.component.RegistryUpdate;
 import uk.gov.hmcts.probate.services.persistence.model.Registry;
 import uk.gov.hmcts.probate.services.persistence.repository.RegistryRepository;
 import uk.gov.hmcts.probate.services.persistence.repository.RepositoryTestConfiguration;
+import uk.gov.hmcts.probate.services.persistence.repository.TestApplicationContextInitializer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ import static org.junit.Assert.assertThat;
             "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"},
         classes = { RegistryInApplicationConfigTest.TestConfiguration.class })
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = {RepositoryTestConfiguration.class})
+@ContextConfiguration(initializers = TestApplicationContextInitializer.class, classes = RepositoryTestConfiguration.class)
 @ActiveProfiles("registry")
 public class RegistryInApplicationConfigTest {
     @Autowired

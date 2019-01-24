@@ -25,14 +25,8 @@ import org.springframework.test.web.servlet.MockMvc;
     "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"})
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@ContextConfiguration(classes = {RepositoryTestConfiguration.class})
+@ContextConfiguration(initializers = TestApplicationContextInitializer.class, classes = RepositoryTestConfiguration.class)
 public class FormDataRepositoryTest {
-
-  {
-    System.setProperty("h2.customDataTypesHandler", TestJsonDataTypeHandler.class.getName());
-    System.setProperty("h2.javaObjectSerializer", TestJavaObjectSerializer.class.getName());
-  }
-
   @Autowired
   private MockMvc mockMvc;
 
