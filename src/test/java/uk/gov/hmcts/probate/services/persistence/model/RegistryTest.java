@@ -19,7 +19,6 @@ public class RegistryTest {
         validator = factory.getValidator();
 
         registry = new Registry();
-        registry.setEmail("registry@hmcts.net");
         registry.setAddress("Petty France");
         registry.setRatio(1L);
         registry.setCounter(1L);
@@ -41,12 +40,6 @@ public class RegistryTest {
     public void shouldEnsureThatRatioIsGreaterThanCounter() {
         registry.setRatio(3L);
         registry.setCounter(4L);
-        assertThatValidationFails();
-    }
-
-    @Test
-    public void shouldValidateEmail() {
-        registry.setEmail("wrong");
         assertThatValidationFails();
     }
 

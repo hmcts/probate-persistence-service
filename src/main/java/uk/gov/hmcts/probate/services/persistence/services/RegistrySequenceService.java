@@ -34,7 +34,6 @@ public class RegistrySequenceService {
     private static final String SEQUENCE_NUMBER = "sequenceNumber";
     private static final String NAME = "name";
     private static final String ADDRESS = "address";
-    private static final String EMAIL = "email";
 
     @Autowired
     public RegistrySequenceService(Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers,
@@ -68,7 +67,6 @@ public class RegistrySequenceService {
         registryDataObject.put(SUBMISSION_REFERENCE, submissionReference);
         registryMapper.put(NAME, registry.capitalizeRegistryName());
         registryMapper.put(SEQUENCE_NUMBER, getNextSequenceNumber(registry.getId()));
-        registryMapper.put(EMAIL, registry.getEmail());
         registryMapper.put(ADDRESS, registry.getAddress());
         registryDataObject.set(REGISTRY, registryMapper);
 

@@ -108,29 +108,26 @@ public class RegistryInApplicationConfigTest {
     }
 
     @Test
-    public void shouldNotAllowUpdatesToEmailsOrAddresses() {
+    public void shouldNotAllowUpdatesAddresses() {
         //given
         Registry oxfordRegistry = properties.getRegistries().stream()
                 .filter(registry -> registry.getId().equals("oxford"))
                 .findAny().get();
-        oxfordRegistry.setEmail("a@b.com");
         oxfordRegistry.setAddress("SW1");
 
         //when
         registryUpdate.updateRegistries(properties.getRegistries());
 
         //then
-        assertThat(registryRepository.findById("oxford").getEmail(), is("oxford@email.com"));
         assertThat(registryRepository.findById("oxford").getAddress(), is("Line 1 Ox\nLine 2 Ox\nLine 3 Ox\nPostCode Ox\n"));
     }
 
     @Test
-    public void shouldAllowUpdatesToEmailsOrAddressesViaADeleteAndAnInsert() {
+    public void shouldAllowUpdatesToAddressesViaADeleteAndAnInsert() {
         //given
         Registry oxfordRegistry = properties.getRegistries().stream()
                 .filter(registry -> registry.getId().equals("oxford"))
                 .findAny().get();
-        oxfordRegistry.setEmail("a@b.com");
         oxfordRegistry.setAddress("SW1");
         List<Registry> duplicatedRegistryWithoutOxford = properties.getRegistries().stream()
                 .filter(registry -> !registry.getId().equals("oxford"))
@@ -142,7 +139,6 @@ public class RegistryInApplicationConfigTest {
         registryUpdate.updateRegistries(properties.getRegistries());
 
         //then
-        assertThat(registryRepository.findById("oxford").getEmail(), is("a@b.com"));
         assertThat(registryRepository.findById("oxford").getAddress(), is("SW1"));
     }
 

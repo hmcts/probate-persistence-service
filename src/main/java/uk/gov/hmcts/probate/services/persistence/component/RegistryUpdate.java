@@ -13,23 +13,24 @@ public class RegistryUpdate {
     @Autowired
     private RegistryRepository registryRepository;
 
-    public List<Registry> updateRegistries(List<Registry> registries) {
-        List<String> registryData = registryRepository.findAll().stream()
+    public List<Registry> updateRegistries(List<Registry> registriesInYaml) {
+        List<String> registryDataInDatabase = registryRepository.findAll().stream()
                 .map(Registry::getId)
                 .collect(Collectors.toList());
-        List<String> registryNames = registries.stream()
+        List<String> registryNames = registriesInYaml.stream()
                 .map(Registry::getId)
                 .collect(Collectors.toList());
 
-        registries.forEach(r -> {
-            if (registryData.contains(r.getId())) {
-                registryRepository.updateRatio(r.getRatio(), r.getId());
+        registriesInYaml.forEach(registryInYaml -> {
+            if (registryDataInDatabase.contains(registryInYaml.getId())) {
+                registryRepository.updateRatio(registryInYaml.getRatio(), registryInYaml.getId());
             } else {
-                registryRepository.save(r);
+                registryInYaml.setCounter(0L);
+                registryRepository.save(registryInYaml);
             }
         });
-        registryData.removeAll(registryNames);
-        registryData.forEach(r -> registryRepository.delete(registryRepository.findById(r)));
-        return registries;
+        registryDataInDatabase.removeAll(registryNames);
+        registryDataInDatabase.forEach(r -> registryRepository.delete(registryRepository.findById(r)));
+        return registriesInYaml;
     }
 }

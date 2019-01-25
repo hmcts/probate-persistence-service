@@ -230,3 +230,10 @@ databaseChangeLog:
             name: counter
             type: BIGINT
         tableName: registry
+- changeSet:
+    id: 21
+    author: sfkamath
+    changes:
+    - dropColumn:
+        columnName: email
+        tableName: registry

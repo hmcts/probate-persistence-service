@@ -58,17 +58,14 @@ public class RegistrySequenceServiceTest {
     @Before
     public void setUp() {
         oxford.setId("oxford");
-        oxford.setEmail("oxford@email.com");
         oxford.setAddress("Test Address Line 1\nTest Address Line 2\nTest Address Postcode");
         oxford.setRatio(3L);
         oxford.setCounter(2L);
         birmingham.setId("birmingham");
-        birmingham.setEmail("birmingham@email.com");
         birmingham.setAddress("Birmingham Test Address Line 1\nTest Address Line 2\nTest Address Postcode");
         birmingham.setRatio(3L);
         birmingham.setCounter(3L);
         manchester.setId("manchester");
-        manchester.setEmail("manchester@email.com");
         manchester.setAddress("Manchester Test Address Line 1\nTest Address Line 2\nTest Address Postcode");
         manchester.setRatio(3L);
         manchester.setCounter(3L);
