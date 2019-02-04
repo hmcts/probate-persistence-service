@@ -37,7 +37,6 @@ registries:
         Line 3 Ox
         PostCode Ox
       ratio: 4
-      counter: 0
     - id: birmingham
       email: birmingham@email.com
       address: |
@@ -46,7 +45,6 @@ registries:
         Line 3 Bham
         PostCode Bham
       ratio: 1
-      counter: 0
     - id: manchester
       email: manchester@email.com
       address: |
@@ -55,7 +53,6 @@ registries:
         Line 3 man
         PostCode Manchester
       ratio: 2
-      counter: 0
 
 
 logging:

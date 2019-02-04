@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 
@@ -24,16 +25,15 @@ public class Registry implements Serializable {
     private String address;
 
     @NotNull
-    @PositiveOrZero
+    @Positive
     private Long ratio;
 
-    @NotNull
     @PositiveOrZero
     private Long counter;
 
-    @AssertTrue(message="counter should be less than or equal to ratio")
-    private boolean isValid() {
-        return this.counter <= this.ratio;
+    @AssertTrue(message="counter, if set, should be less than or equal to ratio")
+    public boolean isValid() {
+        return counter == null || counter <= ratio;
     }
 
     public String getId() {
