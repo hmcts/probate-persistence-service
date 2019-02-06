@@ -187,6 +187,7 @@ dependencies {
     testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: versions.springBootVersion
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: versions.springBootVersion
 
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'

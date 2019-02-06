@@ -27,10 +27,33 @@ spring:
 server:
   port: ${probate.persistence.port}
 
+
 registries:
-  - oxford
-  - birmingham
-  - manchester
+    - id: oxford
+      email: oxford@email.com
+      address: |
+        Line 1 Ox
+        Line 2 Ox
+        Line 3 Ox
+        PostCode Ox
+      ratio: 4
+    - id: birmingham
+      email: birmingham@email.com
+      address: |
+        Line 1 Bham
+        Line 2 Bham
+        Line 3 Bham
+        PostCode Bham
+      ratio: 1
+    - id: manchester
+      email: manchester@email.com
+      address: |
+        Line 1 man
+        Line 2 man
+        Line 3 man
+        PostCode Manchester
+      ratio: 2
+
 
 logging:
   level:

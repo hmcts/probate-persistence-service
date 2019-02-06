@@ -1,5 +1,7 @@
 package uk.gov.hmcts.probate.services.persistence.repository;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,36 +19,41 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import uk.gov.hmcts.probate.services.persistence.model.Registry;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(properties = {
-    "spring.jpa.hibernate.dialect=org.hibernate.dialect.H2Dialect",
-    "spring.jpa.hibernate.ddl-auto: update",
-    "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"})
+        "spring.jpa.hibernate.dialect=org.hibernate.dialect.H2Dialect",
+        "spring.jpa.hibernate.ddl-auto: update",
+        "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"})
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @ContextConfiguration(initializers = TestApplicationContextInitializer.class, classes = RepositoryTestConfiguration.class)
-public class InvitedataRepositoryTest {
-  @Autowired
-  private MockMvc mockMvc;
+public class RegistryRepositoryTest {
+    @Autowired
+    private MockMvc mockMvc;
 
-  @Before
-  public void setUp() throws Exception {
-    mockMvc.perform(post("/invitedata/")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(getJsonFromFile("inviteData.json")))
-        .andExpect(status().isCreated());
-  }
+    @Autowired
+    private RegistryRepository registryRepository;
 
-  @Test
-  public void shouldGetInviteData() throws Exception {
-    mockMvc.perform(get("/invitedata/1"))
-        .andExpect(status().isOk());
-  }
+    @Before
+    public void setUp() throws Exception {
+        mockMvc.perform(post("/registry/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getJsonFromFile("registry.json")))
+                .andExpect(status().isCreated());
+    }
 
-  @Test
-  public void shouldFindByFormdataId() throws Exception {
-    mockMvc.perform(get("/invitedata/search/formdata?id=1"))
-        .andExpect(status().isOk());
-  }
+    @Test
+    public void shouldFindById() throws Exception {
+        mockMvc.perform(get("/registry/search/findById?id=oxford"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldUpdateRatio() {
+        registryRepository.updateRatio(3L, "oxford");
+        Registry registry = registryRepository.findById("oxford");
+        assertThat(registry.getRatio(), is(3L));
+    }
 }
