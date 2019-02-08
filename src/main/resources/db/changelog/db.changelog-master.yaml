@@ -230,3 +230,11 @@ databaseChangeLog:
             name: counter
             type: BIGINT
         tableName: registry
+        
+- changeSet:
+    id: 21
+    author: praveen
+    changes:
+    - createSequence:
+        sequenceName: london_sequence
+        startValue: 40000
