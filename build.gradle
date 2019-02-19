@@ -167,9 +167,11 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: versions.springBootVersion
+
     compile ("com.fasterxml.jackson.core:jackson-databind:2.9.8") {
         force = true
     }
+
     compile ('org.postgresql:postgresql:42.2.2') {
         exclude module: 'slf4j-simple'
     }
@@ -188,6 +190,7 @@ dependencies {
     testCompile group: 'com.google.code.findbugs', name: 'findbugs', version: '3.0.1'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: versions.springBootVersion
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: versions.springBootVersion
 
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
