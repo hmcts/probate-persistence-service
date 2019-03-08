@@ -21,7 +21,7 @@ public class RegistryNotConfiguredException extends RuntimeException{
     }
 
     @Override
-    public Throwable getCause() {
+    public synchronized Throwable getCause() {
         return cause;
     }
 }
