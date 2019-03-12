@@ -3,7 +3,7 @@ import java.util.stream.Collectors
 buildscript {
     dependencies {
         classpath group: 'org.sonarsource.scanner.gradle', name: 'sonarqube-gradle-plugin', version: '2.6.2'
-        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.30")
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.11")
     }
 }
 
