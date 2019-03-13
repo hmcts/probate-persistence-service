@@ -135,4 +135,3 @@ resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
   value = "${module.probate-persistence-db.postgresql_database}"
   vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
 }
-

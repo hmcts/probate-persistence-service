@@ -1,0 +1,24 @@
+---
+registries:
+    - id: oxford
+      address: |
+        Line 1 Ox
+        Line 2 Ox
+        Line 3 Ox
+        PostCode Ox
+      ratio: 4
+    - id: birmingham
+      address: |
+        Line 1 Bham
+        Line 2 Bham
+        Line 3 Bham
+        PostCode Bham
+      ratio: 1
+    - id: manchester
+      address: |
+        Line 1 man
+        Line 2 man
+        Line 3 man
+        PostCode Manchester
+      ratio: 2
+
