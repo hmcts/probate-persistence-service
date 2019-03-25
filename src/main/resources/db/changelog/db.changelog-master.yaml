@@ -204,5 +204,10 @@ databaseChangeLog:
     - createSequence:
         sequenceName: manchester_sequence
         startValue: 30000
-
-
+- changeSet:
+    id: 20
+    author: dave.jones
+    changes:
+    - createSequence:
+        sequenceName: ctsc_sequence
+        startValue: 40000
