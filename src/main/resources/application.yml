@@ -31,6 +31,7 @@ registries:
   - oxford
   - birmingham
   - manchester
+  - ctsc
 
 logging:
   level:
