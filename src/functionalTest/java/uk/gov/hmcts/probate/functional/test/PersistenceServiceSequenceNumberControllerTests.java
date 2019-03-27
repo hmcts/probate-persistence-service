@@ -10,8 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SerenityRunner.class)
 public class PersistenceServiceSequenceNumberControllerTests extends IntegrationTestBase {
-    //private static final String BIRMINGHAM = "birmingham";
-    //private static final String OXFORD = "oxford";
+
     private static final String CTSC = "ctsc";
 
     @Test
