@@ -27,6 +27,10 @@ withPipeline("java", product, component) {
   enableDeployToAKS()
   enableDbMigration()  // for liquibase update
 
+  before('buildinfra:prod') {
+    error 'Deliberately breaking pipeline to prevent prod deployment'
+  }
+
   after('test') {
     try {
 //      sh './gradlew pitest'
