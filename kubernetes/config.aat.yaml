@@ -4,5 +4,5 @@ metadata:
   name: ${SERVICE_NAME}-config
   namespace: ${NAMESPACE}
 data:
-  SPRING_APPLICATION_JSON : '{"registries":["oxford","birmingham","manchester"]}'
+  SPRING_APPLICATION_JSON : '{"registries":["ctsc"]}'
 
