@@ -1,0 +1,4 @@
+java:
+  configmap:
+  SPRING_APPLICATION_JSON : '{"registries":["oxford","birmingham","manchester"]}'
+

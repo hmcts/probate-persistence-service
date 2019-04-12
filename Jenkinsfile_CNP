@@ -24,7 +24,7 @@ withPipeline("java", product, component) {
   loadVaultSecrets(secrets)
   enableSlackNotifications('#probate-jenkins')
   enableDockerBuild()
-  enableDeployToAKS()
+  installCharts ()
   enableDbMigration()  // for liquibase update
 
 //  before('buildinfra:prod') {
