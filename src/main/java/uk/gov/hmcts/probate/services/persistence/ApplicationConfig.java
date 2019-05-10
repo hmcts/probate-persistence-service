@@ -39,11 +39,4 @@ public class ApplicationConfig  extends RepositoryRestConfigurerAdapter {
     public List<String> getRegistries() {
         return registries;
     }
-
-    @Bean
-    public Map<String, PostgresSequenceMaxValueIncrementer> registrySequenceNumbers() {
-        return registries
-                .stream()
-                .collect(Collectors.toMap(s -> s, s -> new PostgresSequenceMaxValueIncrementer(dataSource, s + "_sequence")));
-    }
 }
