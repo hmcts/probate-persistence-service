@@ -63,7 +63,7 @@ variable "capacity" {
 }
 
 variable "liquibase_at_startup" {
-  default = "false"
+  default = "true"
 }
 
 variable "appinsights_instrumentation_key" {
@@ -76,9 +76,9 @@ variable "common_tags" {
 }
 
 variable "asp_rg" {
-  
+
 }
 
 variable "asp_name" {
-  
+
 }
