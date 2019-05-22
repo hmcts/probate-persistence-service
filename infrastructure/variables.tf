@@ -63,7 +63,7 @@ variable "capacity" {
 }
 
 variable "liquibase_at_startup" {
-  default = "true"
+  default = "false"
 }
 
 variable "appinsights_instrumentation_key" {
