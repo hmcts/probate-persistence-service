@@ -76,9 +76,9 @@ variable "common_tags" {
 }
 
 variable "asp_rg" {
-  
+
 }
 
 variable "asp_name" {
-  
+
 }
