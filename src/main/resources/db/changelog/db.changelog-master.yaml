@@ -211,3 +211,27 @@ databaseChangeLog:
     - createSequence:
         sequenceName: ctsc_sequence
         startValue: 40000
+- changeSet:
+    id: 21
+    author: nigel
+    changes:
+    - dropSequence:
+        sequenceName: birmingham_sequence
+- changeSet:
+    id: 22
+    author: nigel
+    changes:
+    - dropSequence:
+        sequenceName: oxford_sequence
+- changeSet:
+    id: 23
+    author: praveen
+    changes:
+    - dropSequence:
+        sequenceName: manchester_sequence
+- changeSet:
+    id: 24
+    author: dave.jones
+    changes:
+    - dropSequence:
+        sequenceName: ctsc_sequence
