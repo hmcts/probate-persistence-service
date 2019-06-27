@@ -122,4 +122,22 @@
         <cve>CVE-2018-10936</cve>
     </suppress>
 
+    <suppress>
+        <notes><![CDATA[
+   file name: tomcat-embed-core-8.5.35.jar
+   ]]></notes>
+        <gav regex="true">^org\.apache\.tomcat\.embed:tomcat-embed-core:.*$</gav>
+        <cpe>cpe:/a:apache_software_foundation:tomcat</cpe>
+        <cve>CVE-2019-0199</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+   file name: tomcat-embed-core-8.5.35.jar
+   ]]></notes>
+        <gav regex="true">^org\.apache\.tomcat\.embed:tomcat-embed-core:.*$</gav>
+        <cpe>cpe:/a:apache_tomcat:apache_tomcat</cpe>
+        <cve>CVE-2019-0199</cve>
+    </suppress>
+
 </suppressions>
