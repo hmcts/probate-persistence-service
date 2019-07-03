@@ -1,13 +1,3 @@
-provider "vault" {
-  //  # It is strongly recommended to configure this provider through the
-  //  # environment variables described above, so that each user can have
-  //  # separate credentials set in the environment.
-  //  #
-  //  # This will default to using $VAULT_ADDR
-  //  # But can be set explicitly
-  address = "https://vault.reform.hmcts.net:6200"
-}
-
 provider "azurerm" {
   version = "1.22.1"
 }
@@ -94,6 +84,7 @@ module "probate-persistence-db" {
   product = "${local.app_full_name}-postgres-db"
   location = "${var.location}"
   env = "${var.env}"
+  subscription = "${var.subscription}"
   postgresql_user = "${data.azurerm_key_vault_secret.probate_postgresql_user.value}"
   database_name = "${data.azurerm_key_vault_secret.probate_postgresql_database.value}"
   sku_name = "GP_Gen5_2"
