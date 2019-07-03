@@ -131,7 +131,13 @@
         <cpe>cpe:/a:apache_software_foundation:tomcat</cpe>
         <cve>CVE-2019-0199</cve>
     </suppress>
-
+    <suppress>
+        <notes><![CDATA[
+  file name: tomcat-embed-core-9.0.13.jar
+  ]]></notes>
+        <gav regex="true">^org\.apache\.tomcat\.embed:tomcat-embed-core:.*$</gav>
+        <cve>CVE-2019-0221</cve>
+    </suppress>
     <suppress>
         <notes><![CDATA[
    file name: tomcat-embed-core-8.5.35.jar
