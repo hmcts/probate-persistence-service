@@ -7,6 +7,7 @@ Microservice to handle persistence layer for probate
 - Gradle
 - Docker
 
+
 ### Running the application
 #### Docker
 To run the service locally you can use the *postgres* Docker image which can be run with the following command:  
