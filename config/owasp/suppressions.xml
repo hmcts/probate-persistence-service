@@ -80,6 +80,7 @@
    ]]></notes>
         <gav regex="true">^com\.google\.guava:guava:.*$</gav>
         <cpe>cpe:/a:google:guava</cpe>
+        <cve>CVE-2018-10237</cve>
     </suppress>
 
     <suppress>
@@ -112,6 +113,38 @@
    ]]></notes>
         <gav regex="true">^org\.slf4j:slf4j-api:.*$</gav>
         <cve>CVE-2018-8088</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+   file name: postgresql-42.2.2.jar
+   ]]></notes>
+        <gav regex="true">^org\.postgresql:postgresql:.*$</gav>
+        <cve>CVE-2018-10936</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+   file name: tomcat-embed-core-8.5.35.jar
+   ]]></notes>
+        <gav regex="true">^org\.apache\.tomcat\.embed:tomcat-embed-core:.*$</gav>
+        <cpe>cpe:/a:apache_software_foundation:tomcat</cpe>
+        <cve>CVE-2019-0199</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+  file name: tomcat-embed-core-9.0.13.jar
+  ]]></notes>
+        <gav regex="true">^org\.apache\.tomcat\.embed:tomcat-embed-core:.*$</gav>
+        <cve>CVE-2019-0221</cve>
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+   file name: tomcat-embed-core-8.5.35.jar
+   ]]></notes>
+        <gav regex="true">^org\.apache\.tomcat\.embed:tomcat-embed-core:.*$</gav>
+        <cpe>cpe:/a:apache_tomcat:apache_tomcat</cpe>
+        <cve>CVE-2019-0199</cve>
     </suppress>
 
 </suppressions>
