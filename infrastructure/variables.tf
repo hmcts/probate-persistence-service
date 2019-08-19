@@ -28,7 +28,9 @@ variable "component" {
   default = "backend"
 }
 
-variable "subscription" {}
+variable "subscription" {
+  description = "the human friendly name of the subscription, ie. qa, or prod"
+}
 
 
 // CNP settings
