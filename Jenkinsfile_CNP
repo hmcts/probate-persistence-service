@@ -5,9 +5,10 @@
 String product = "probate"
 String component = "persistence-service"
 
-List<LinkedHashMap<String, Object>> secrets = [
-
-]
+def secrets = [
+        'probate-${env}'      : [
+                                ]
+              ]
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
@@ -20,7 +21,6 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 withPipeline("java", product, component) {
 
-  setVaultName('probate')
   loadVaultSecrets(secrets)
   enableSlackNotifications('#probate-jenkins')
   enableDockerBuild()
