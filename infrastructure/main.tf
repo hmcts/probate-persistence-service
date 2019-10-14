@@ -51,7 +51,7 @@ data "azurerm_key_vault_secret" "probate_postgresql_database" {
 
 
 module "probate-persistence-service" {
-  source = "git@github.com:hmcts/moj-module-webapp.git?ref=master"
+  source = "git@github.com:hmcts/cnp-module-webapp?ref=master"
   product = "${local.app_full_name}"
   location = "${var.location}"
   env = "${var.env}"
@@ -90,7 +90,7 @@ module "probate-persistence-service" {
 }
 
 module "probate-persistence-db" {
-  source = "git@github.com:hmcts/moj-module-postgres?ref=master"
+  source = "git@github.com:hmcts/cnp-module-postgres?ref=master"
   product = "${local.app_full_name}-postgres-db"
   location = "${var.location}"
   env = "${var.env}"
