@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationInsightsAgent>
+    <AgentLogger>INFO</AgentLogger>
+    <Instrumentation>
+        <BuiltIn enabled="true">
+            <HTTP enabled="true"/>
+        </BuiltIn>
+        <Class name="uk.gov.hmcts.probate.controller.SequenceNumberController">
+            <Method name="getNext" reportExecutionTime="true"/>
+        </Class>
+        <Class name="uk.gov.hmcts.probate.services.ProbatePersistenceInfoContributor">
+            <Method name="contribute" reportExecutionTime="true"/>
+        </Class>
+        <Class name="uk.gov.hmcts.probate.services.SequenceNumberService">
+            <Method name="getNext" reportCaughtExceptions="true" reportExecutionTime="true"/>
+        </Class>
+    </Instrumentation>
+</ApplicationInsightsAgent>
