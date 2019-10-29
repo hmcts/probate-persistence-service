@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'application'
     id 'pmd'
-    id 'org.springframework.boot' version '2.0.7.RELEASE'
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
     id 'org.owasp.dependencycheck' version '5.0.0'
     id 'com.github.ben-manes.versions' version '0.20.0'
     id 'com.gorylenko.gradle-git-properties' version '1.5.2'
@@ -66,6 +66,7 @@ findbugs{
 
 sonarqube {
     properties {
+        property "sonar.exclusions", "**/*.java"
         property "sonar.projectName", "Probate :: Persistence Service"
         property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
         property "sonar.host.url", "https://sonar.reform.hmcts.net/"
@@ -167,7 +168,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: versions.springBootVersion
-    compile ("com.fasterxml.jackson.core:jackson-databind:2.9.8") {
+    compile ("com.fasterxml.jackson.core:jackson-databind:2.9.9.3") {
         force = true
     }
     compile ('org.postgresql:postgresql:42.2.2') {
