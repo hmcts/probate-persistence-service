@@ -66,6 +66,7 @@ findbugs{
 
 sonarqube {
     properties {
+        property "sonar.exclusions", "**/*.java"
         property "sonar.projectName", "Probate :: Persistence Service"
         property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
         property "sonar.host.url", "https://sonar.reform.hmcts.net/"
