@@ -28,9 +28,9 @@ withPipeline("java", product, component) {
 //  enableDeployToAKS()
   enableDbMigration('probate')  // for liquibase update
 
-//  before('buildinfra:prod') {
-//    error 'Deliberately breaking pipeline to prevent prod deployment'
-//  }
+  before('buildinfra:prod') {
+    error 'Deliberately breaking pipeline to prevent prod deployment'
+  }
 //
   after('test') {
     try {
