@@ -24,6 +24,9 @@ public interface InvitedataRepository extends PagingAndSortingRepository<Invited
     @RestResource(path = "formdata")
     List<Invitedata> findByFormdataId(@Param("id") String id);
 
+    @Query("select i from invitedata i where  i.formdataId = :formdataId")
+    List<Invitedata> findByFormDataId(@Param("formdataId")String formdataId);
+
     @Query("select i from invitedata i where  i.creationTime >= :startDate")
     Page<Invitedata> findByCreatedAfterDate(@Param("startDate") @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate, Pageable page);
 }
