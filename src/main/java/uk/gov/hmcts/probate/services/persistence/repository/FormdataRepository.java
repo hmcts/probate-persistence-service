@@ -21,7 +21,7 @@ public interface FormdataRepository extends PagingAndSortingRepository<Formdata,
 
     Formdata findBySubmissionReference(@Param("submissionReference") long submissionReference);
 
-    @Query("select f from Formdata f where  f.creationTime >= :startDate")
+    @Query("select f from Formdata f where  f.creationTime >= :startDate and  f.formdata.ccdCase is null")
     Page<Formdata> findByCreatedAfterDate(@Param("startDate") @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate, Pageable page);
 
 
