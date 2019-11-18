@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
-@RepositoryRestResource(collectionResourceRel = "formdata", path = "formdata")
+@RepositoryRestResource(collectionResourceRel = "formdata_vw", path = "formdata")
 public interface FormdataRepository extends PagingAndSortingRepository<Formdata, String> {
 
     Optional<Formdata> findById(@Param("id") String id);
@@ -23,6 +23,5 @@ public interface FormdataRepository extends PagingAndSortingRepository<Formdata,
 
     @Query("select f from Formdata f where  f.creationTime >= :startDate")
     Page<Formdata> findByCreatedAfterDate(@Param("startDate") @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate, Pageable page);
-
 
 }
