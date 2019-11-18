@@ -14,15 +14,14 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 
-@RepositoryRestResource(collectionResourceRel = "formdata", path = "formdata")
+@RepositoryRestResource(collectionResourceRel = "formdata_vw", path = "formdata")
 public interface FormdataRepository extends PagingAndSortingRepository<Formdata, String> {
 
     Optional<Formdata> findById(@Param("id") String id);
 
     Formdata findBySubmissionReference(@Param("submissionReference") long submissionReference);
 
-    @Query("select f from Formdata f where  f.creationTime >= :startDate and  f.formdata.ccdCase is null")
+    @Query("select f from Formdata f where  f.creationTime >= :startDate")
     Page<Formdata> findByCreatedAfterDate(@Param("startDate") @DateTimeFormat(pattern = "dd/MM/yyyy") Date startDate, Pageable page);
-
 
 }
