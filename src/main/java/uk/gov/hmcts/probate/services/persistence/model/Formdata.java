@@ -17,6 +17,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @TypeDefs({
         @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class),
@@ -24,6 +25,7 @@ import javax.persistence.Id;
 })
 
 @Entity
+@Table(name = "formdata_vw")
 public class Formdata implements Serializable {
 
     @Id
