@@ -7,7 +7,6 @@ String component = "persistence-service"
 
 withPipeline("java", product, component) {
 
-  loadVaultSecrets(secrets)
   enableSlackNotifications('#probate-jenkins')
   enableDbMigration('probate')  // for liquibase update
 
