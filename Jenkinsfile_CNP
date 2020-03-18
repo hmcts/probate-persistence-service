@@ -7,7 +7,6 @@ String component = "persistence-service"
 
 withPipeline("java", product, component) {
 
-  enableDockerBuild()
   installCharts()
   enableDbMigration('probate')  // for liquibase update
 
