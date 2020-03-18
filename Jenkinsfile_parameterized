@@ -14,21 +14,7 @@ properties([
 String product = "probate"
 String component = "persistence-service"
 
-List<LinkedHashMap<String, Object>> secrets = [
-
-]
-
-static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
-  [ $class: 'AzureKeyVaultSecret',
-    secretType: 'Secret',
-    name: secretName,
-    version: '',
-    envVariable: envVar
-  ]
-}
-
 withParameterizedPipeline('java', product, component, params.ENVIRONMENT, 'sandbox') {
-    loadVaultSecrets(secrets)
     enableDbMigration() // for liquibase update
     after('test') {
         publishHTML target: [
@@ -43,22 +29,6 @@ withParameterizedPipeline('java', product, component, params.ENVIRONMENT, 'sandb
                 reportDir            : "build/reports/jacoco",
                 reportFiles          : "index.html",
                 reportName           : "sol-ccd-service Code Coverage Report"
-        ]
-
-        publishHTML target: [
-                alwaysLinkToLastBuild: true,
-                reportDir            : "build/reports/findbugs",
-                reportFiles          : "main.html",
-                reportName           : "sol-ccd-service find Bugs Report"
-        ]
-    }
-
-    after('functionalTest:saat') {
-        publishHTML target: [
-                reportDir            : "target/site/serenity/",
-                reportFiles          : "index.html",
-                reportName           : "SAAT Functional Tests",
-                alwaysLinkToLastBuild: true
         ]
     }
 }
