@@ -1,14 +1,7 @@
 // Infrastructural variables
 variable "product" {}
 
-variable "raw_product" {
-  default = "probate" // jenkins-library overrides product for PRs and adds e.g. pr-118-cmc
-}
-
-
-variable "microservice" {
-  default = "persistence-service"
-}
+variable "component" {}
 
 variable "location" {
   default = "UK South"
@@ -22,10 +15,6 @@ variable "ilbIp" { }
 
 variable "deployment_env" {
   type = "string"
-}
-
-variable "component" {
-  default = "backend"
 }
 
 variable "subscription" {}

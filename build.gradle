@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'application'
     id 'pmd'
-    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'org.springframework.boot' version '2.0.9.RELEASE'
     id 'org.owasp.dependencycheck' version '5.0.0'
     id 'com.github.ben-manes.versions' version '0.20.0'
     id 'com.gorylenko.gradle-git-properties' version '1.5.2'
@@ -147,20 +147,12 @@ pitest {
 
 repositories {
     mavenLocal()
-    maven { url "https://dl.bintray.com/hmcts/hmcts-maven" }
-    maven { url 'https://repo.spring.io/libs-milestone' }
-}
-
-
-processResources {
-    from ('src/lib/AI-Agent.xml') {
-        into 'lib'
-    }
+    jcenter()
 }
 
 def versions = [
-        reformsJavaLoggingVersion: '3.0.4',
-        springBootVersion: '2.0.7.RELEASE',
+        reformsJavaLoggingVersion: '5.1.1',
+        springBootVersion: '2.0.9.RELEASE',
         serenityVersion: '2.0.30',
 ]
 
@@ -168,7 +160,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: versions.springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: versions.springBootVersion
-    compile ("com.fasterxml.jackson.core:jackson-databind:2.9.9.3") {
+    compile ("com.fasterxml.jackson.core:jackson-databind:2.10.3") {
         force = true
     }
     compile ('org.postgresql:postgresql:42.2.2') {
@@ -177,10 +169,13 @@ dependencies {
 
     compile group: 'org.liquibase', name: 'liquibase-core', version: '3.6.2'
 
-    compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: versions.reformsJavaLoggingVersion
-    compile group: 'uk.gov.hmcts.reform', name: 'java-logging-appinsights', version: versions.reformsJavaLoggingVersion
-    compile group: 'uk.gov.hmcts.reform', name: 'java-logging-httpcomponents', version: versions.reformsJavaLoggingVersion
+    compile group: 'uk.gov.hmcts.reform', name: 'logging', version: versions.reformsJavaLoggingVersion
+    compile group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: versions.reformsJavaLoggingVersion
     compile group: 'org.springframework.hateoas', name: 'spring-hateoas'
+
+    implementation ('uk.gov.hmcts.reform:properties-volume-spring-boot-starter:0.0.4') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
+    }
 
     testCompile group: 'org.pitest', name: 'pitest', version: '1.3.2'
     testCompile 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
@@ -225,7 +220,7 @@ task printVersion {
     }
 }
 
-run {
+bootRun {
     if (debug == 'true') {
         jvmArgs = ['-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005']
     }

@@ -1,0 +1,14 @@
+java:
+  image: ${IMAGE_NAME}
+  ingressHost: ${SERVICE_FQDN}
+  environment:
+    LIQUIBASE_AT_STARTUP: true
+    PROBATE_PERSISTENCE_SHOW_SQL: true
+
+    PROBATE_POSTGRESQL_HOSTNAME: "{{ .Release.Name }}-postgresql"
+    PROBATE_POSTGRESQL_DATABASE: "{{ .Values.postgresql.postgresqlDatabase}}"
+    PROBATE_POSTGRESQL_USER: "{{ .Values.postgresql.postgresqlUsername}}"
+    PROBATE_POSTGRESQL_PASSWORD: "{{ .Values.postgresql.postgresqlPassword}}"
+    SPRING_CLOUD_PROPERTIESVOLUME_ENABLED: false
+  postgresql:
+    enabled: true

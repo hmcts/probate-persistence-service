@@ -4,8 +4,7 @@ services:
   persistence-service:
     build:
       context: .
-    image: probate/persistence-service
-    # image: docker.artifactory.reform.hmcts.net/probate/persistence-service
+    image: hmctspublic.azurecr.io/probate/persistence-service
     command: --wait-for-database 30
     container_name: persistence-service
     environment:
@@ -31,7 +30,6 @@ services:
     build:
       context: docker/database
     image: probate/persistence-service-database
-    # image: docker.artifactory.reform.hmcts.net/probate/persistence-service-database:029be26d40b4c4d4a792f801d94b8569472fb014
     container_name: persistence-service-database
     ports:
       - 5432:5432

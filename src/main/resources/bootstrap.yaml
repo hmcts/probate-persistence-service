@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    propertiesvolume:
+      prefixed: false
+      paths: /mnt/secrets/probate
+      aliases:
+        persistence-service-POSTGRES-PASS: spring.datasource.password
+        AppInsightsInstrumentationKey: azure.application-insights.instrumentation-key
