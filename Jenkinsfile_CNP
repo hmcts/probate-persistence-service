@@ -5,27 +5,10 @@
 String product = "probate"
 String component = "persistence-service"
 
-def secrets = [
-	'probate-${env}': [
-	]
-]
-
-static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
-  [ $class: 'AzureKeyVaultSecret',
-    secretType: 'Secret',
-    name: secretName,
-    version: '',
-    envVariable: envVar
-  ]
-}
-
-
 withPipeline("java", product, component) {
 
   loadVaultSecrets(secrets)
   enableSlackNotifications('#probate-jenkins')
-  enableDockerBuild()
-//  enableDeployToAKS()
   enableDbMigration('probate')  // for liquibase update
 
 //  before('buildinfra:prod') {
@@ -52,21 +35,5 @@ withPipeline("java", product, component) {
             reportFiles          : "index.html",
             reportName           : "sol-ccd-service Code Coverage Report"
     ]
-
-    publishHTML target: [
-            alwaysLinkToLastBuild: true,
-            reportDir            : "build/reports/findbugs",
-            reportFiles          : "main.html",
-            reportName           : "sol-ccd-service find Bugs Report"
-    ]
-  }
-
-  after('functionalTest:saat') {
-      publishHTML target: [
-              reportDir            : "target/site/serenity/",
-              reportFiles          : "index.html",
-              reportName           : "SAAT Functional Tests",
-              alwaysLinkToLastBuild: true
-      ]
   }
 }
