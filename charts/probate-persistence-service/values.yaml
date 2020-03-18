@@ -1,0 +1,20 @@
+java:
+  image: 'hmctspublic.azurecr.io/probate/persistence-service:latest'
+  applicationPort: 8282
+  aadIdentityName: probate
+  ingressHost: probate-persistence-service-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
+  environment:
+    PROBATE_POSTGRESQL_USER: probate@probate-persistence-service-postgres-db-{{ .Values.global.environment }}
+    PROBATE_POSTGRESQL_HOSTNAME: probate-persistence-service-postgres-db-{{ .Values.global.environment }}.postgres.database.azure.com
+    PROBATE_POSTGRESQL_DATABASE: probate
+    PROBATE_POSTGRESQL_PORT: 5432
+    PROBATE_PERSISTENCE_SHOW_SQL: false
+    LIQUIBASE_AT_STARTUP: false
+    SPRING_APPLICATION_JSON: '{"registries":["oxford","birmingham","manchester", "ctsc"]}'
+    LOG_LEVEL: INFO
+
+  keyVaults:
+    probate:
+      secrets:
+        - persistence-service-POSTGRES-PASS
+        - AppInsightsInstrumentationKey

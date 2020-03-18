@@ -1,32 +1,10 @@
-provider "vault" {
-  //  # It is strongly recommended to configure this provider through the
-  //  # environment variables described above, so that each user can have
-  //  # separate credentials set in the environment.
-  //  #
-  //  # This will default to using $VAULT_ADDR
-  //  # But can be set explicitly
-  address = "https://vault.reform.hmcts.net:6200"
-}
-
 provider "azurerm" {
   version = "1.22.1"
 }
 
 locals {
-  aseName = "core-compute-${var.env}"
-  //java_proxy_variables: "-Dhttp.proxyHost=${var.proxy_host} -Dhttp.proxyPort=${var.proxy_port} -Dhttps.proxyHost=${var.proxy_host} -Dhttps.proxyPort=${var.proxy_port}"
-  app_full_name = "${var.product}-${var.microservice}"
-
-
-  local_env = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "aat" : "saat" : var.env}"
-  local_ase = "${(var.env == "preview" || var.env == "spreview") ? (var.env == "preview" ) ? "core-compute-aat" : "core-compute-saat" : local.aseName}"
-
-
-  //probate_frontend_hostname = "probate-frontend-aat.service.core-compute-aat.internal"
-  previewVaultName = "${var.raw_product}-aat"
-  nonPreviewVaultName = "${var.raw_product}-${var.env}"
-  vaultName = "${(var.env == "preview" || var.env == "spreview") ? local.previewVaultName : local.nonPreviewVaultName}"
-
+  app_full_name = "${var.product}-${var.component}"
+  vaultName = "${var.product}-${var.env}"
 }
 
 data "azurerm_key_vault" "probate_key_vault" {
@@ -36,17 +14,17 @@ data "azurerm_key_vault" "probate_key_vault" {
 
 data "azurerm_key_vault_secret" "spring_application_json_persistence_service" {
   name = "spring-application-json-persistence-service"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 data "azurerm_key_vault_secret" "probate_postgresql_user" {
   name = "probate-postgresql-user"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 data "azurerm_key_vault_secret" "probate_postgresql_database" {
   name = "probate-postgresql-database"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 
@@ -67,7 +45,7 @@ module "probate-persistence-service" {
   app_settings = {
      // Logging vars
     REFORM_TEAM = "${var.product}"
-    REFORM_SERVICE_NAME = "${var.microservice}"
+    REFORM_SERVICE_NAME = "${var.component}"
     REFORM_ENVIRONMENT = "${var.env}"
   
 
@@ -81,11 +59,8 @@ module "probate-persistence-service" {
     PROBATE_POSTGRESQL_PORT = "${module.probate-persistence-db.postgresql_listen_port}"
     PROBATE_PERSISTENCE_SHOW_SQL = "${var.probate_postgresql_show_sql}"
     LIQUIBASE_AT_STARTUP = "${var.liquibase_at_startup}"
-    java_app_name = "${var.microservice}"
+    java_app_name = "${var.component}"
     LOG_LEVEL = "${var.log_level}"
-    TESTING = "Test"
-    //ROOT_APPENDER = "JSON_CONSOLE" //Remove json logging
-
   }
 }
 
@@ -110,30 +85,30 @@ module "probate-persistence-db" {
 resource "azurerm_key_vault_secret" "POSTGRES-USER" {
   name = "${local.app_full_name}-POSTGRES-USER"
   value = "${module.probate-persistence-db.user_name}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES-PASS" {
   name = "${local.app_full_name}-POSTGRES-PASS"
   value = "${module.probate-persistence-db.postgresql_password}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_HOST" {
   name = "${local.app_full_name}-POSTGRES-HOST"
   value = "${module.probate-persistence-db.host_name}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_PORT" {
   name = "${local.app_full_name}-POSTGRES-PORT"
   value = "${module.probate-persistence-db.postgresql_listen_port}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
 resource "azurerm_key_vault_secret" "POSTGRES_DATABASE" {
   name = "${local.app_full_name}-POSTGRES-DATABASE"
   value = "${module.probate-persistence-db.postgresql_database}"
-  vault_uri = "${data.azurerm_key_vault.probate_key_vault.vault_uri}"
+  key_vault_id = "${data.azurerm_key_vault.probate_key_vault.id}"
 }
 
