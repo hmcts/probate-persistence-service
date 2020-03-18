@@ -1,6 +1,8 @@
 # Probate Persistence Service 
 Microservice to handle persistence layer for probate
 
+## This microservice is no longer in use
+
 ## Getting Started
 ### Prerequisites
 - Java 8
